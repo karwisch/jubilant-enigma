@@ -3,9 +3,2632 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Threshold Explorer - Untangled Narrative</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --teal: #1B7F92;
+            --mauve: #b36278;
+            --light-teal: #2a9fb5;
+            --light-mauve: #c47a95;
+            --cream: #f8f6f3;
+            --charcoal: #2a2a2a;
+            --warm-white: #fefdfb;
+            --shadow-teal: rgba(27, 127, 146, 0.15);
+            --shadow-mauve: rgba(179, 98, 120, 0.15);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .container,
+        .testimonials-section,
+        .contact-section,
+        .about-section {
+            scroll-margin-top: 120px;
+        }
+
+        .navbar {
+            background: #ffffff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0;
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+        }
+        
+        .nav-brand {
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+        
+        .nav-logo {
+            max-width: 171px;
+            height: auto;
+            display: block;
+            transition: opacity 0.2s ease;
+        }
+        
+        .nav-brand a:hover .nav-logo {
+            opacity: 0.8;
+        }
+        
+        .nav-brand a {
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1em;
+            transition: color 0.2s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: #1B7F92;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #1B7F92;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hero-section {
+            background: #e8a03c;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 5rem;
+            text-align: left;
+        }
+
+        .hero-rocket {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 3px solid var(--charcoal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11rem;
+            color: #2d2d2d;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            flex-shrink: 0;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .hero-headline {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-subheadline {
+            font-size: 1.3rem;
+            color: var(--charcoal);
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--charcoal);
+            opacity: 0.8;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-start;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .cta-button.primary {
+            background: var(--teal);
+            color: white;
+        }
+
+        .cta-button.primary:hover {
+            background: var(--light-teal);
+            transform: translateY(-2px);
+        }
+
+        .cta-button.secondary {
+            background: var(--mauve);
+            color: white;
+        }
+
+        .cta-button.secondary:hover {
+            background: var(--light-mauve);
+            transform: translateY(-2px);
+        }
+
+        .spectrum-divider {
+            padding: 3rem 0;
+            background: linear-gradient(to bottom, var(--warm-white), #f9f9f9, var(--warm-white));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .divider-container {
+            text-align: center;
+            width: 100%;
+            max-width: none;
+            position: relative;
+        }
+
+        .divider-line {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            position: relative;
+            width: 100%;
+        }
+
+        .divider-line::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -100vw;
+            right: -100vw;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                var(--teal) 0%, 
+                #a4789c 50%, 
+                var(--mauve) 100%);
+            z-index: 0;
+        }
+
+        .divider-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .divider-dot:hover {
+            transform: scale(1.2);
+        }
+
+        .divider-dot.red { background: #d32f2f; }
+        .divider-dot.orange { background: #f57c00; }
+        .divider-dot.yellow { background: #fbc02d; }
+        .divider-dot.mauve { background: var(--mauve); }
+        .divider-dot.purple { background: #a4789c; }
+        .divider-dot.teal { background: var(--teal); }
+        .divider-dot.navy { background: #2c5282; }
+
+        /* Scroll Animation Classes for Dividers */
+        .spectrum-divider .divider-dot {
+            transform: translateX(-100vw);
+            transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .spectrum-divider .divider-dot.teal {
+            transition-delay: 0.2s;
+        }
+
+        .spectrum-divider .divider-dot.purple {
+            transition-delay: 0.4s;
+        }
+
+        .spectrum-divider .divider-dot.mauve {
+            transition-delay: 0.6s;
+        }
+
+        .spectrum-divider.animate-in .divider-dot {
+            transform: translateX(0);
+        }
+
+        .spectrum-divider.animate-out .divider-dot {
+            transform: translateX(100vw);
+            transition-delay: 0s;
+        }
+
+        .spectrum-divider.animate-out .divider-dot.teal {
+            transition-delay: 0.1s;
+        }
+
+        .spectrum-divider.animate-out .divider-dot.purple {
+            transition-delay: 0.2s;
+        }
+
+        .spectrum-divider.animate-out .divider-dot.mauve {
+            transition-delay: 0.3s;
+        }
+
+        .divider-text {
+            font-size: 1.1rem;
+            color: var(--charcoal);
+            font-weight: 500;
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        /* Simple Divider */
+        .simple-divider {
+            padding: 2rem 0;
+            background: var(--warm-white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .divider-bar {
+            height: 1px;
+            background: var(--mauve);
+            width: 200px;
+            opacity: 0.3;
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            background: var(--teal);
+            padding: 4rem 0;
+            overflow: hidden;
+            scroll-margin-top: 120px;
+        }
+
+        .testimonials-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            position: relative;
+        }
+
+        .testimonials-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .testimonials-slider {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            padding: 0 80px;
+        }
+
+        .testimonials-track {
+            display: flex;
+            gap: 2rem;
+            transition: transform 0.5s ease;
+            will-change: transform;
+        }
+
+        .testimonial-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--teal);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            z-index: 5;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .testimonial-nav:hover {
+            background: var(--light-teal);
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        .testimonial-nav.prev {
+            left: 30px;
+        }
+
+        .testimonial-nav.next {
+            right: 30px;
+        }
+
+        .testimonial-nav:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            width: 400px;
+            flex-shrink: 0;
+            border-left: 4px solid var(--charcoal);
+        }
+
+        .testimonial-quote {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--charcoal);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .testimonial-author strong {
+            color: var(--teal);
+            font-weight: 600;
+        }
+
+        .testimonial-author span {
+            color: var(--mauve);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .testimonial-navigation {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .testimonial-btn {
+            background: white;
+            color: var(--teal);
+            border: 2px solid white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-btn:hover {
+            background: var(--teal);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .testimonial-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .testimonial-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: white;
+            transform: scale(1.2);
+        }
+
+        .dot:hover {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Contact Form Section */
+        .contact-section {
+            background: var(--warm-white);
+            padding: 4rem 0;
+            border-top: 1px solid rgba(179, 98, 120, 0.2);
+            scroll-margin-top: 120px;
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .contact-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .contact-subtitle {
+            font-size: 1.2rem;
+            color: var(--charcoal);
+            opacity: 0.8;
+            text-align: center;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+            background-color: white;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--teal);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .checkbox-group {
+            margin: 2rem 0;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            cursor: pointer;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            font-weight: normal;
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+
+        .form-link {
+            color: var(--teal);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .form-link:hover {
+            color: var(--light-teal);
+            text-decoration: underline;
+        }
+
+        .submit-btn {
+            background: var(--teal);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: var(--light-teal);
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .form-note {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--mauve);
+            font-style: italic;
+        }
+
+        .form-message {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .form-message.success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
+        .form-message.error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+
+        .form-message h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .form-message p {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        /* About Section */
+        .about-section {
+            background: #f6f3f0;
+            padding: 4rem 0;
+            scroll-margin-top: 120px;
+        }
+
+        .about-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .about-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--charcoal);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-intro {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--teal);
+        }
+
+        .about-philosophy {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--teal);
+            margin-top: 1.5rem;
+            font-style: italic;
+        }
+
+        .about-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .jim-photo {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .jim-photo:hover {
+            transform: scale(1.02);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: white;
+            color: var(--charcoal);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem;
+            scroll-margin-top: 120px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            margin-bottom: 0.3rem;
+        }
+
+        .header p {
+            font-size: 0.85rem;
+            color: var(--charcoal);
+            opacity: 0.8;
+            max-width: calc(100% - 60px);
+            margin: 0 auto 0 60px;
+            text-align: left;
+        }
+
+        .spectrum-container {
+            position: relative;
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .scale-numbers {
+            position: relative;
+            height: 20px;
+            font-size: 0.8rem;
+            color: var(--charcoal);
+            opacity: 0.6;
+            font-weight: 500;
+            margin-left: 60px;
+            width: calc(100% - 60px);
+        }
+
+        .scale-numbers span:nth-child(1) { position: absolute; left: 1%; }
+        .scale-numbers span:nth-child(2) { position: absolute; left: 25%; }
+        .scale-numbers span:nth-child(3) { position: absolute; left: 50%; }
+        .scale-numbers span:nth-child(4) { position: absolute; left: 75%; }
+        .scale-numbers span:nth-child(5) { position: absolute; left: 100%; transform: translateX(-100%); }
+
+        .spectrum-track {
+            position: relative;
+            height: 12px;
+            background: linear-gradient(
+                90deg, 
+                #d32f2f 1%, #d32f2f 6%,       
+                #f57c00 6%, #f57c00 17%,       
+                #fbc02d 17%, #fbc02d 29%,       
+                #b36278 29%, #b36278 48%,       
+                #a4789c 48%, #a4789c 70%,       
+                #1B7F92 70%, #1B7F92 88%,       
+                #2c5282 88%, #2c5282 100%);
+            border-radius: 6px;
+            margin: 5rem 0 4rem 0;
+            overflow: visible;
+            margin-left: 60px;
+            width: calc(100% - 60px);
+        }
+
+        .threshold-marker {
+            position: absolute;
+            top: -6px;
+            width: 4px;
+            height: 24px;
+            background: var(--charcoal);
+            border-radius: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .threshold-marker:hover {
+            transform: scale(1.1);
+        }
+
+        .threshold-marker::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 16px;
+            height: 16px;
+            border: 3px solid var(--warm-white);
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            z-index: 2;
+        }
+
+        .threshold-label {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
+            font-weight: 600;
+            background: var(--warm-white);
+            padding: 0.5rem 0.9rem;
+            border-radius: 10px;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            border: 2px solid;
+            text-align: center;
+            min-width: 110px;
+            cursor: pointer;
+            z-index: 5;
+            transition: all 0.2s ease;
+        }
+
+        .threshold-label::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            width: 0;
+            height: 0;
+            transform: translateX(-50%);
+        }
+
+        /* Threshold positioning and colors - matching your original design exactly */
+        .threshold-marker.tangled { left: 1%; }
+        .threshold-marker.tangled .threshold-label {
+            top: 30px;
+            background: linear-gradient(135deg, #ffebee, var(--warm-white));
+            border-color: #d32f2f;
+            color: #d32f2f;
+        }
+        .threshold-marker.tangled::before { background: #d32f2f; }
+        .threshold-marker.tangled .threshold-label::after { 
+            top: -8px; border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 10px solid #d32f2f; 
+        }
+
+        .threshold-marker.hope { left: 6%; }
+        .threshold-marker.hope .threshold-label {
+            top: -60px;
+            background: linear-gradient(135deg, #fff3e0, var(--warm-white));
+            border-color: #f57c00;
+            color: #f57c00;
+        }
+        .threshold-marker.hope::before { background: #f57c00; }
+        .threshold-marker.hope .threshold-label::after { 
+            bottom: -8px; border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 10px solid #f57c00; 
+        }
+
+        .threshold-marker.untangling { left: 17%; }
+        .threshold-marker.untangling .threshold-label {
+            top: 30px;
+            background: linear-gradient(135deg, #fff8e1, var(--warm-white));
+            border-color: #fbc02d;
+            color: #e65100;
+        }
+        .threshold-marker.untangling::before { background: #fbc02d; }
+        .threshold-marker.untangling .threshold-label::after { 
+            top: -8px; border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 10px solid #fbc02d; 
+        }
+
+        .threshold-marker.agency { left: 29%; }
+        .threshold-marker.agency .threshold-label {
+            top: -60px;
+            background: linear-gradient(135deg, var(--shadow-mauve), var(--warm-white));
+            border-color: var(--mauve);
+            color: var(--mauve);
+        }
+        .threshold-marker.agency::before { background: var(--mauve); }
+        .threshold-marker.agency .threshold-label::after { 
+            bottom: -8px; border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 10px solid var(--mauve); 
+        }
+
+        .threshold-marker.balance { left: 48%; }
+        .threshold-marker.balance .threshold-label {
+            top: 30px;
+            background: linear-gradient(135deg, rgba(164, 120, 156, 0.1), var(--warm-white));
+            border-color: #a4789c;
+            color: #a4789c;
+        }
+        .threshold-marker.balance::before { background: #a4789c; }
+        .threshold-marker.balance .threshold-label::after { 
+            top: -8px; border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 10px solid #a4789c; 
+        }
+
+        .threshold-marker.leveling { left: 70%; }
+        .threshold-marker.leveling .threshold-label {
+            top: -60px;
+            background: linear-gradient(135deg, var(--shadow-teal), #e8f4f8);
+            border-color: var(--teal);
+            color: var(--teal);
+        }
+        .threshold-marker.leveling::before { background: var(--teal); }
+        .threshold-marker.leveling .threshold-label::after { 
+            bottom: -8px; border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 10px solid var(--teal); 
+        }
+
+        .threshold-marker.satisfied { left: 88%; }
+        .threshold-marker.satisfied .threshold-label {
+            top: 30px;
+            background: linear-gradient(135deg, rgba(44, 82, 130, 0.15), #ebf4ff);
+            border-color: #2c5282;
+            color: #2c5282;
+        }
+        .threshold-marker.satisfied::before { background: #2c5282; }
+        .threshold-marker.satisfied .threshold-label::after { 
+            top: -8px; border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 10px solid #2c5282; 
+        }
+
+        .threshold-marker.active .threshold-label {
+            transform: translateX(-50%) scale(1.1);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        .threshold-content {
+            padding: 1.5rem;
+            margin: 1rem 0;
+            margin-left: 30px;
+            width: calc(100% - 30px);
+            transition: all 0.3s ease;
+        }
+
+        /* Dynamic threshold styling based on selected threshold */
+        .threshold-content.tangled .threshold-title {
+            color: #d32f2f;
+        }
+
+        .threshold-content.hope .threshold-title {
+            color: #f57c00;
+        }
+
+        .threshold-content.untangling .threshold-title {
+            color: #e65100;
+        }
+
+        .threshold-content.agency .threshold-title {
+            color: var(--mauve);
+        }
+
+        .threshold-content.balance .threshold-title {
+            color: #a4789c;
+        }
+
+        .threshold-content.leveling .threshold-title {
+            color: var(--teal);
+        }
+
+        .threshold-content.satisfied .threshold-title {
+            color: #2c5282;
+        }
+
+        .threshold-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--teal);
+            margin-bottom: 0.6rem;
+        }
+
+        .threshold-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+            font-style: italic;
+            line-height: 1.3;
+            color: var(--charcoal);
+        }
+
+        .threshold-section {
+            margin-bottom: 0.5rem;
+        }
+
+        .threshold-cta {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .threshold-btn {
+            display: inline-block;
+            background: var(--teal);
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .threshold-btn:hover {
+            background: var(--light-teal);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(27, 127, 146, 0.3);
+        }
+
+        .threshold-section h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 0.6rem;
+        }
+
+        .experience-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.6rem;
+        }
+
+        .experience-list li {
+            background: var(--warm-white);
+            padding: 0.8rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--teal);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        /* Dynamic experience card colors based on threshold */
+        .threshold-content.tangled .experience-list li {
+            background: linear-gradient(135deg, #ffebee, var(--warm-white));
+            border-color: #d32f2f;
+        }
+
+        .threshold-content.hope .experience-list li {
+            background: linear-gradient(135deg, #fff3e0, var(--warm-white));
+            border-color: #f57c00;
+        }
+
+        .threshold-content.untangling .experience-list li {
+            background: linear-gradient(135deg, #fff8e1, var(--warm-white));
+            border-color: #fbc02d;
+        }
+
+        .threshold-content.agency .experience-list li {
+            background: linear-gradient(135deg, var(--shadow-mauve), var(--warm-white));
+            border-color: var(--mauve);
+        }
+
+        .threshold-content.balance .experience-list li {
+            background: linear-gradient(135deg, rgba(164, 120, 156, 0.1), var(--warm-white));
+            border-color: #a4789c;
+        }
+
+        .threshold-content.leveling .experience-list li {
+            background: linear-gradient(135deg, var(--shadow-teal), #e8f4f8);
+            border-color: var(--teal);
+        }
+
+        .threshold-content.satisfied .experience-list li {
+            background: linear-gradient(135deg, rgba(44, 82, 130, 0.15), #ebf4ff);
+            border-color: #2c5282;
+        }
+
+        .experience-list li:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .experience-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+        }
+
+        .experience-emoji {
+            font-size: 2rem;
+            line-height: 1;
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+
+        .experience-content {
+            flex: 1;
+        }
+
+        .experience-title {
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 0.3rem;
+            font-size: 0.8rem;
+        }
+
+        .experience-title::first-letter {
+            display: none;
+        }
+
+        .experience-description {
+            color: var(--charcoal);
+            opacity: 0.8;
+            font-size: 0.75rem;
+            line-height: 1.3;
+        }
+
+        .welcome-message {
+            background: linear-gradient(135deg, var(--shadow-teal), #e8f4f8);
+            border-radius: 16px;
+            padding: 2.5rem;
+            text-align: center;
+            border: 2px solid var(--teal);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .welcome-message h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            color: var(--teal);
+            margin-bottom: 1rem;
+        }
+
+        .welcome-message p {
+            font-size: 1.1rem;
+            color: var(--charcoal);
+            opacity: 0.8;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .progress-indicator {
+            text-align: center;
+            margin: 0.5rem 0 0 0;
+            font-size: 0.8rem;
+            color: var(--charcoal);
+            opacity: 0.7;
+        }
+
+        .mobile-instruction {
+            display: none;
+            text-align: center;
+            margin: 1.5rem 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--teal);
+            letter-spacing: 0.3px;
+        }
+
+        /* Mobile threshold buttons - matching your original design */
+        .mobile-thresholds {
+            display: none;
+            flex-direction: column;
+            gap: 0.4rem;
+            background: var(--warm-white);
+            border-radius: 12px;
+            padding: 0.8rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin: 1rem auto 0.5rem auto;
+            max-width: 400px;
+        }
+
+        .mobile-threshold-button {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border: 2px solid;
+            border-radius: 12px;
+            background: var(--warm-white);
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Open Sans', sans-serif;
+            min-height: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            line-height: 1.4;
+        }
+
+        .mobile-threshold-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-width: 3px;
+        }
+
+        .mobile-threshold-button .title {
+            font-weight: 600;
+        }
+
+        .mobile-threshold-button .description {
+            font-size: 0.85rem;
+            font-weight: 400;
+            margin-top: 0.8rem;
+            line-height: 1.4;
+            opacity: 0.9;
+        }
+
+        .mobile-threshold-expanded-content {
+            display: none;
+            background: #f8f9fa;
+            margin: 1rem -1.2rem -1rem -1.2rem;
+            padding: 1.2rem;
+            border-radius: 0 0 12px 12px;
+            border-top: 2px solid rgba(0,0,0,0.1);
+            text-align: left;
+        }
+
+        .mobile-threshold-button.expanded .mobile-threshold-expanded-content {
+            display: block;
+            animation: slideDownMobile 0.3s ease-out;
+        }
+
+        @keyframes slideDownMobile {
+            from {
+                opacity: 0;
+                max-height: 0;
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+            to {
+                opacity: 1;
+                max-height: 500px;
+                padding-top: 1.2rem;
+                padding-bottom: 1.2rem;
+            }
+        }
+
+        .mobile-expanded-subtitle {
+            font-style: italic;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            color: var(--charcoal);
+            opacity: 0.8;
+            text-align: left;
+        }
+
+        .mobile-experiences-header {
+            font-weight: 600;
+            color: var(--teal);
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+            text-align: left;
+        }
+
+        .mobile-experience-item {
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            text-align: left;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+        }
+
+        .mobile-experience-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .mobile-experience-emoji {
+            font-size: 1.8rem;
+            line-height: 1;
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+
+        .mobile-experience-content {
+            flex: 1;
+        }
+
+        .mobile-experience-title {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            font-size: 0.85rem;
+            color: var(--charcoal);
+            text-align: left;
+        }
+
+        .mobile-experience-title::first-letter {
+            display: none;
+        }
+
+        .mobile-experience-description {
+            font-size: 0.8rem;
+            line-height: 1.4;
+            color: var(--charcoal);
+            opacity: 0.8;
+            text-align: left;
+        }
+
+        /* Mobile threshold colors */
+        .mobile-threshold-button.tangled { border-color: #d32f2f; color: #d32f2f; }
+        .mobile-threshold-button.hope { border-color: #f57c00; color: #f57c00; }
+        .mobile-threshold-button.untangling { border-color: #fbc02d; color: #e65100; }
+        .mobile-threshold-button.agency { border-color: var(--mauve); color: var(--mauve); }
+        .mobile-threshold-button.balance { border-color: #a4789c; color: #a4789c; }
+        .mobile-threshold-button.leveling { border-color: var(--teal); color: var(--teal); }
+        .mobile-threshold-button.satisfied { border-color: var(--teal); color: var(--teal); }
+
+        .mobile-threshold-button.active {
+            transform: scale(1.02);
+        }
+
+        @media (max-width: 1100px) {
+            .experience-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 20px;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .nav-links a {
+                font-size: 0.9em;
+            }
+
+            .hero-section {
+                padding: 2.5rem 1rem;
+            }
+
+            .hero-content {
+                flex-direction: column;
+                gap: 2rem;
+                text-align: center;
+                align-items: center;
+            }
+
+            .hero-rocket {
+                width: 70px;
+                height: 70px;
+                font-size: 4.5rem;
+            }
+
+            .hero-headline {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+
+            .hero-subheadline {
+                font-size: 1.1rem;
+                margin-bottom: 1rem;
+            }
+
+            .hero-description {
+                font-size: 0.95rem;
+                margin-bottom: 2rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                gap: 0.8rem;
+                align-items: center;
+            }
+
+            .cta-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+                width: 100%;
+                max-width: 280px;
+            }
+
+            .spectrum-divider {
+                padding: 2rem 0;
+            }
+
+            .divider-line {
+                gap: 1rem;
+            }
+
+            .divider-dot {
+                width: 12px;
+                height: 12px;
+            }
+
+            .divider-text {
+                font-size: 1rem;
+            }
+
+            .testimonials-section {
+                padding: 3rem 0;
+                scroll-margin-top: 100px;
+            }
+
+            .testimonials-container {
+                padding: 0 2rem;
+            }
+
+            .testimonials-title {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .testimonial-card {
+                width: 300px;
+                padding: 1.5rem;
+            }
+
+            .testimonial-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .testimonial-nav.prev {
+                left: 10px;
+            }
+
+            .testimonial-nav.next {
+                right: 10px;
+            }
+
+            .testimonial-quote {
+                font-size: 1rem;
+            }
+
+            .testimonial-navigation {
+                gap: 1rem;
+                margin-top: 1.5rem;
+            }
+
+            .testimonial-btn {
+                padding: 0.7rem 1.2rem;
+                font-size: 0.8rem;
+            }
+
+            .dot {
+                width: 10px;
+                height: 10px;
+            }
+
+            .contact-section {
+                padding: 3rem 0;
+            }
+
+            .contact-container {
+                padding: 0 1rem;
+            }
+
+            .contact-title {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+
+            .contact-subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 2rem;
+            }
+
+            .contact-form {
+                padding: 2rem 1.5rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .submit-btn {
+                font-size: 1rem;
+                padding: 0.9rem 1.5rem;
+            }
+
+            .about-section {
+                padding: 3rem 0;
+            }
+
+            .about-container {
+                padding: 0 1rem;
+            }
+
+            .about-title {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .about-text {
+                font-size: 1rem;
+            }
+
+            .about-intro {
+                font-size: 1.1rem;
+            }
+
+            .about-image {
+                order: -1;
+            }
+
+            .jim-photo {
+                max-width: 250px;
+            }
+
+            .threshold-btn {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .container { 
+                padding: 1rem; 
+                scroll-margin-top: 100px;
+            }
+            
+            .header h1 { 
+                font-size: 2rem; 
+            }
+            
+            .header { 
+                margin-bottom: 0.5rem; 
+            }
+            
+            .header p {
+                font-size: 0.75rem;
+                line-height: 1.3;
+                margin: 0 auto;
+                max-width: none;
+            }
+            
+            .spectrum-container {
+                display: none;
+            }
+            
+            .mobile-instruction {
+                display: block !important;
+            }
+            
+            .mobile-thresholds {
+                display: flex !important;
+            }
+            
+            .threshold-content {
+                display: none;
+            }
+            
+            .threshold-title {
+                font-size: 1.5rem;
+            }
+            
+            .threshold-subtitle {
+                font-size: 0.9rem;
+                padding: 0.8rem 1rem;
+            }
+            
+            .experience-list {
+                grid-template-columns: 1fr;
+                gap: 0.6rem;
+            }
+            
+            .experience-list li {
+                padding: 0.8rem;
+            }
+            
+            .experience-title {
+                font-size: 0.85rem;
+            }
+            
+            .experience-description {
+                font-size: 0.8rem;
+            }
+            
+            .scale-numbers {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="https://www.untanglednarrative.com">
+                    <img src="https://www.untanglednarrative.com/wp-content/uploads/2025/12/cropped-untangled-narrative-2026-logo-horizontal.png" alt="Untangled Narrative, LLC" class="nav-logo">
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="#testimonials">Testimonials</a>
+                <a href="#contact">Contact</a>
+                <a href="#about">About Jim</a>
+                <a href="https://www.untanglednarrative.com/blog/">Blog</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero-section">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-rocket">🚀</div>
+                <div class="hero-text">
+                    <h1 class="hero-headline">Turn Internal Friction<br>Into Forward Motion</h1>
+                    <p class="hero-subheadline">Smart, capable people get stuck not because they lack ability, but because a component of their narrative conflicts with their goals.</p>
+                    <p class="hero-description">Untangled Narrative helps you move from feeling trapped in old patterns to recognizing new possibilities, actively experimenting with change, building confidence and skills, and eventually becoming someone who trusts their own expertise and multiplies their impact.</p>
+                    <div class="hero-cta">
+                        <a href="#threshold-explorer" class="cta-button primary">Explore Your Journey</a>
+                        <a href="#contact" class="cta-button secondary">Get Started Today</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="spectrum-divider">
+        <div class="divider-container">
+            <div class="divider-line">
+                <div class="divider-dot teal"></div>
+                <div class="divider-dot purple"></div>
+                <div class="divider-dot mauve"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="threshold-explorer">
+        <div class="header">
+            <h1>Interactive Journey Explorer</h1>
+            <p>Explore each stage of this example journey from being tangled to leveling up. These are general thresholds of an average person. You may not agree with all descriptions and not all clients start with tangled (Example: You may arrive ready to start in "Building Skill-sets")</p>
+        </div>
+
+        <div class="spectrum-container">
+            <div class="scale-numbers">
+                <span>1</span>
+                <span>25</span>
+                <span>50</span>
+                <span>75</span>
+                <span>100</span>
+            </div>
+            <div class="spectrum-track">
+                <div class="threshold-marker tangled" data-threshold="tangled">
+                    <div class="threshold-label">Tangled</div>
+                </div>
+                <div class="threshold-marker hope" data-threshold="hope">
+                    <div class="threshold-label">Hopeful and Curious</div>
+                </div>
+                <div class="threshold-marker untangling" data-threshold="untangling">
+                    <div class="threshold-label">Actively Untangling</div>
+                </div>
+                <div class="threshold-marker agency" data-threshold="agency">
+                    <div class="threshold-label">Building Agency</div>
+                </div>
+                <div class="threshold-marker balance" data-threshold="balance">
+                    <div class="threshold-label">Finding Balance</div>
+                </div>
+                <div class="threshold-marker leveling" data-threshold="leveling">
+                    <div class="threshold-label">Building Skill-sets</div>
+                </div>
+                <div class="threshold-marker satisfied" data-threshold="satisfied">
+                    <div class="threshold-label">Leveling Up</div>
+                </div>
+            </div>
+            <div class="progress-indicator">
+                Click on any threshold marker above to explore that stage
+            </div>
+        </div>
+
+        <!-- Mobile instruction -->
+        <div class="mobile-instruction">
+            Tap any threshold below to explore that stage
+        </div>
+
+        <!-- Mobile threshold buttons -->
+        <div class="mobile-thresholds">
+            <button class="mobile-threshold-button tangled" data-threshold="tangled">
+                <div class="title">Tangled</div>
+                <div class="mobile-threshold-expanded-content">
+                    <div class="mobile-expanded-subtitle">You might feel stuck and overwhelmed, often unable to gain traction or momentum. Days may feel repetitive with no clear way forward.</div>
+                    <div class="mobile-experiences-header">When you're in this threshold, you might experience:</div>
+                    <div class="mobile-experience-item">
+                        <div class="mobile-experience-emoji">🔄</div>
+                        <div class="mobile-experience-content">
+                            <div class="mobile-experience-title">Loss of agency and momentum</div>
+                            <div class="mobile-experience-description">Days might feel indistinguishable from each other, which can signal you're not making the progress or creating the change you want.</div>
+                        </div>
+                    </div>
+                    <div class="mobile-experience-item">
+                        <div class="mobile-experience-emoji">🌀</div>
+                        <div class="mobile-experience-content">
+                            <div class="mobile-experience-title">Absence of direction</div>
+                            <div class="mobile-experience-description">You may struggle to see options or pathways forward, which feels different from just having difficulties. It's more like being lost than just challenged.</div>
+                        </div>
+                    </div>
+                    <div class="mobile-experience-item">
+                        <div class="mobile-experience-emoji">🧩</div>
+                        <div class="mobile-experience-content">
+                            <div class="mobile-experience-title">Pattern recognition without solution</div>
+                            <div class="mobile-experience-description">You might be aware something is wrong (you can see the pattern) but lack the tools or perspective to break out of it.</div>
+                        </div>
+                    </div>
+                    <div class="mobile-experience-item">
+                        <div class="mobile-experience-emoji">😶</div>
+                        <div class="mobile-experience-content">
+                            <div class="mobile-experience-title">Emotional flatness</div>
+                            <div class="mobile-experience-description">Days can blend together with a sense of numbness or resignation, where you may have stopped actively trying to create change.</div>
+                        </div>
+                    </div>
+                </div>
+            </button>
+            <button class="mobile-threshold-button hope" data-threshold="hope">
+                <div class="title">Sparked Hope and Curiosity</div>
+                <div class="mobile-threshold-expanded-content">
+                    <div class="mobile-expanded-subtitle">You may be starting to see the possibility that things could be different. You might find yourself looking at how others handle similar situations.</div>
+                    <div class="mobile-experiences-header">When you're in this threshold, you might experience:</div>
+                    <div class="mobile-experience-item">
+                        <div class="mobile-experience-emoji">✨</div>
+                        <div class="mobile-experience-content">
+                            <div class="mobile-experience-title">First glimpse of possibility</div>
+                            <div class="mobile-experience-description">The initial spark that change might actually be achievable, breaking through previous resignation.</div>
+                        </div>
+                    </div>
+                    <div class="mobile-experience-item">
+                        <div class="mobile-experience-emoji">🔭</div>
+                        <div class="mobile-experience-content">
+                            <div class="mobile-experience-title">Curiosity about alternatives</div>
+                            <div class="mobile-experience-description">You start paying attention to how others navigate similar challenges, seeking models and inspiration.</div>
+                        </div>
+                    </div>
+                    <div class="mobile-experience-item">
+                        <div class="mobile-experience-emoji">🤏</div>
+                        <div class="mobile-experience-content">
+                            <div class="mobile-experience-title">Tentative engagement</div>
+                            <div class="mobile-experience-description">You're willing to explore options without fully committing, testing the waters of change.</div>
+                        </div>
+                    </div>
+                    <div class="mobile-experience-item">
+                        <div class="mobile-experience-emoji">🌱</div>
+                        <div class="mobile-experience-content">
+                            <div class="mobile-experience-title">Cautious optimism</div>
+                            <div class="mobile-experience-description">Hope emerges carefully, tempered by past disappointments but genuine in its emergence.</div>
+                        </div>
+                    </div>
+                </div>
+            </button>
+            <button class="mobile-threshold-button untangling" data-threshold="untangling">
+                <div class="title">Actively Untangling</div>
+                <div class="mobile-threshold-expanded-content">
+                    <div class="mobile-expanded-subtitle">You're experimenting with alternatives to old patterns. You're testing new approaches and building trust that change can work.</div>
+                    <div class="mobile-experiences-header">When you're in this threshold, you experience:</div>
+                    <div class="mobile-experience-item">
+                        <div class="mobile-experience-emoji">🧪</div>
+                        <div class="mobile-experience-content">
+                            <div class="mobile-experience-title">Willingness to experiment</div>
+                            <div class="mobile-experience-description">You're ready to try small alternatives to familiar patterns, even when they feel uncomfortable.</div>
+                        </div>
+                    </div>
+                    <div class="mobile-experience-item">
+                        <div class="mobile-experience-emoji">⏸️</div>
+                        <div class="mobile-experience-content">
+                            <div class="mobile-experience-title">Pattern interruption</div>
+                            <div class="mobile-experience-description">You actively notice when old patterns arise and consciously choose different responses.</div>
+                        </div>
+                    </div>
+                    <div class="mobile-experience-item">
+                        <div class="mobile-experience-emoji">📋</div>
+                        <div class="mobile-experience-content">
+                            <div class="mobile-experience-title">Building evidence</div>
+                            <div class="mobile-experience-description">Each small success creates data that change is possible, gradually building confidence in new approaches.</div>
+                        </div>
+                    </div>
+                    <div class="mobile-experience-item">
+                        <div class="mobile-experience-emoji">🤝</div>
+                        <div class="mobile-experience-content">
+                            <div class="mobile-experience-title">Tolerance for discomfort</div>
+                            <div class="mobile-experience-description">You're willing to sit with the awkwardness of doing things differently while you learn.</div>
+                        </div>
+                    </div>
+                </div>
+            </button>
+            <button class="mobile-threshold-button agency" data-threshold="agency">
+                <div class="title">Building Agency</div>
+                <div class="mobile-threshold-expanded-content">
+                    <div class="mobile-expanded-subtitle">You understand the areas of life that are actually under your control and you're taking consistent action in those areas.</div>
+                    <div class="mobile-experiences-header">When you're in this threshold, you experience:</div>
+                    <div class="mobile-experience-item">
+                        <div class="mobile-experience-emoji">🎪</div>
+                        <div class="mobile-experience-content">
+                            <div class="mobile-experience-title">Clear sphere of influence</div>
+                            <div class="mobile-experience-description">You can distinguish between what you can control, what you can influence, and what's beyond your reach.</div>
+                        </div>
+                    </div>
+                    <div class="mobile-experience-item">
+                        <div class="mobile-experience-emoji">🎬</div>
+                        <div class="mobile-experience-content">
+                            <div class="mobile-experience-title">Consistent action</div>
+                            <div class="mobile-experience-description">You take regular steps in areas where you have genuine agency, building momentum through reliability.</div>
+                        </div>
+                    </div>
+                    <div class="mobile-experience-item">
+                        <div class="mobile-experience-emoji">🎛️</div>
+                        <div class="mobile-experience-content">
+                            <div class="mobile-experience-title">Response vs. reaction</div>
+                            <div class="mobile-experience-description">You catch yourself before automatic responses and choose more intentional ways of engaging.</div>
+                        </div>
+                    </div>
+                    <div class="mobile-experience-item">
+                        <div class="mobile-experience-emoji">🌊</div>
+                        <div class="mobile-experience-content">
+                            <div class="mobile-experience-title">Growing confidence</div>
+                            <div class="mobile-experience-description">Your ability to follow through builds trust in yourself and creates a foundation for bigger changes.</div>
+                        </div>
+                    </div>
+                </div>
+            </button>
+            <button class="mobile-threshold-button balance" data-threshold="balance">
+                <div class="title">Finding Balance</div>
+                <div class="mobile-threshold-expanded-content">
+                    <div class="mobile-expanded-subtitle">You're identifying your core values and learning to align your daily choices with what actually matters to you.</div>
+                    <div class="mobile-experiences-header">When you're in this threshold, you experience:</div>
+                    <div class="mobile-experience-item">
+                        <div class="mobile-experience-emoji">💎</div>
+                        <div class="mobile-experience-content">
+                            <div class="mobile-experience-title">Values clarification</div>
+                            <div class="mobile-experience-description">You can name what truly matters to you, beyond what you think should matter or what others expect.</div>
+                        </div>
+                    </div>
+                    <div class="mobile-experience-item">
+                        <div class="mobile-experience-emoji">🧭</div>
+                        <div class="mobile-experience-content">
+                            <div class="mobile-experience-title">Alignment practice</div>
+                            <div class="mobile-experience-description">You actively work to match your daily choices with your identified values, even when it's difficult.</div>
+                        </div>
+                    </div>
+                    <div class="mobile-experience-item">
+                        <div class="mobile-experience-emoji">🛡️</div>
+                        <div class="mobile-experience-content">
+                            <div class="mobile-experience-title">Boundary setting</div>
+                            <div class="mobile-experience-description">You say no to things that don't align and yes to things that do, even when it creates temporary discomfort.</div>
+                        </div>
+                    </div>
+                    <div class="mobile-experience-item">
+                        <div class="mobile-experience-emoji">🧘</div>
+                        <div class="mobile-experience-content">
+                            <div class="mobile-experience-title">Satisfaction over achievement</div>
+                            <div class="mobile-experience-description">You begin to distinguish between being productive and being fulfilled, choosing fulfillment more often.</div>
+                        </div>
+                    </div>
+                </div>
+            </button>
+            <button class="mobile-threshold-button leveling" data-threshold="leveling">
+                <div class="title">Building Skill-sets</div>
+                <div class="mobile-threshold-expanded-content">
+                    <div class="mobile-expanded-subtitle">You're developing capabilities that compound over time. You're teaching others and integrating new skills into your identity.</div>
+                    <div class="mobile-experiences-header">When you're in this threshold, you experience:</div>
+                    <div class="mobile-experience-item">
+                        <div class="mobile-experience-emoji">🧬</div>
+                        <div class="mobile-experience-content">
+                            <div class="mobile-experience-title">Skill integration</div>
+                            <div class="mobile-experience-description">New capabilities become part of how you see yourself, not just things you can do.</div>
+                        </div>
+                    </div>
+                    <div class="mobile-experience-item">
+                        <div class="mobile-experience-emoji">🔗</div>
+                        <div class="mobile-experience-content">
+                            <div class="mobile-experience-title">Compound learning</div>
+                            <div class="mobile-experience-description">Skills you develop start supporting each other, creating accelerated growth and capability.</div>
+                        </div>
+                    </div>
+                    <div class="mobile-experience-item">
+                        <div class="mobile-experience-emoji">👨‍🏫</div>
+                        <div class="mobile-experience-content">
+                            <div class="mobile-experience-title">Teaching and sharing</div>
+                            <div class="mobile-experience-description">You naturally help others develop similar skills, which deepens your own understanding.</div>
+                        </div>
+                    </div>
+                    <div class="mobile-experience-item">
+                        <div class="mobile-experience-emoji">🧠</div>
+                        <div class="mobile-experience-content">
+                            <div class="mobile-experience-title">Strategic development</div>
+                            <div class="mobile-experience-description">You choose which skills to develop based on long-term vision rather than immediate needs.</div>
+                        </div>
+                    </div>
+                </div>
+            </button>
+            <button class="mobile-threshold-button satisfied" data-threshold="satisfied">
+                <div class="title">Leveling Up</div>
+                <div class="mobile-threshold-expanded-content">
+                    <div class="mobile-expanded-subtitle">You're leading transformation in others while maintaining your own growth. You're operating at your highest capacity while helping others reach theirs.</div>
+                    <div class="mobile-experiences-header">When you're in this threshold, you experience:</div>
+                    <div class="mobile-experience-item">
+                        <div class="mobile-experience-emoji">🚀</div>
+                        <div class="mobile-experience-content">
+                            <div class="mobile-experience-title">Leadership emergence</div>
+                            <div class="mobile-experience-description">Others naturally look to you for guidance and support in their own transformation journeys.</div>
+                        </div>
+                    </div>
+                    <div class="mobile-experience-item">
+                        <div class="mobile-experience-emoji">🔧</div>
+                        <div class="mobile-experience-content">
+                            <div class="mobile-experience-title">Systems thinking</div>
+                            <div class="mobile-experience-description">You create processes and environments that support growth in yourself and others without constant personal attention.</div>
+                        </div>
+                    </div>
+                    <div class="mobile-experience-item">
+                        <div class="mobile-experience-emoji">🏆</div>
+                        <div class="mobile-experience-content">
+                            <div class="mobile-experience-title">Sustained excellence</div>
+                            <div class="mobile-experience-description">You maintain high performance while staying connected to your values and well-being.</div>
+                        </div>
+                    </div>
+                    <div class="mobile-experience-item">
+                        <div class="mobile-experience-emoji">🌟</div>
+                        <div class="mobile-experience-content">
+                            <div class="mobile-experience-title">Generative impact</div>
+                            <div class="mobile-experience-description">Your growth creates conditions for others to grow, multiplying your influence beyond direct action.</div>
+                        </div>
+                    </div>
+                </div>
+            </button>
+        </div>
+
+        <div id="threshold-content" class="threshold-content">
+            <div class="welcome-message">
+                <h2>Welcome to Your Transformation Journey</h2>
+                <p>Select any threshold above to explore what that stage feels like and what experiences characterize each phase of growth.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const thresholdData = {
+            tangled: {
+                title: "Tangled",
+                subtitle: "You might feel stuck and overwhelmed, often unable to gain traction or momentum. Days may feel repetitive with no clear way forward.",
+                experiences: [
+                    {
+                        title: "🔄 Loss of agency and momentum",
+                        description: "Days might feel indistinguishable from each other, which can signal you're not making the progress or creating the change you want."
+                    },
+                    {
+                        title: "🌀 Absence of direction",
+                        description: "You may struggle to see options or pathways forward, which feels different from just having difficulties. It's more like being lost than just challenged."
+                    },
+                    {
+                        title: "🧩 Pattern recognition without solution",
+                        description: "You might be aware something is wrong (you can see the pattern) but lack the tools or perspective to break out of it."
+                    },
+                    {
+                        title: "😶 Emotional flatness",
+                        description: "Days can blend together with a sense of numbness or resignation, where you may have stopped actively trying to create change."
+                    }
+                ]
+            },
+            hope: {
+                title: "Sparked Hope and Curiosity",
+                subtitle: "You may be starting to see the possibility that things could be different. You might find yourself looking at how others handle similar situations.",
+                experiences: [
+                    {
+                        title: "✨ First glimpse of possibility",
+                        description: "The initial spark that change might actually be achievable, often breaking through previous resignation."
+                    },
+                    {
+                        title: "🔭 Curiosity about alternatives",
+                        description: "You might start paying attention to how others navigate similar challenges, seeking models and inspiration."
+                    },
+                    {
+                        title: "🤏 Tentative engagement",
+                        description: "You may find yourself willing to explore options without fully committing, testing the waters of change."
+                    },
+                    {
+                        title: "🌱 Cautious optimism",
+                        description: "Hope often emerges carefully, tempered by past disappointments but genuine in its emergence."
+                    }
+                ]
+            },
+            untangling: {
+                title: "Actively Untangling",
+                subtitle: "You might be experimenting with alternatives to old patterns. You could be testing new approaches and building trust that change can work.",
+                experiences: [
+                    {
+                        title: "🧪 Willingness to experiment",
+                        description: "You may be ready to try small alternatives to familiar patterns, even when they feel uncomfortable."
+                    },
+                    {
+                        title: "⏸️ Pattern interruption",
+                        description: "You might actively notice when old patterns arise and consciously choose different responses."
+                    },
+                    {
+                        title: "📋 Building evidence",
+                        description: "Small successes can create data that change is possible, gradually building confidence in new approaches."
+                    },
+                    {
+                        title: "🤝 Tolerance for discomfort",
+                        description: "You may be willing to sit with the awkwardness of doing things differently while you learn."
+                    }
+                ]
+            },
+            agency: {
+                title: "Building Agency",
+                subtitle: "You might be understanding the areas of life that are actually under your control and taking more consistent action in those areas.",
+                experiences: [
+                    {
+                        title: "🎪 Clear sphere of influence",
+                        description: "You may be learning to distinguish between what you can control, what you can influence, and what's beyond your reach."
+                    },
+                    {
+                        title: "🎬 Consistent action",
+                        description: "You might be taking more regular steps in areas where you have genuine agency, building momentum through reliability."
+                    },
+                    {
+                        title: "🎛️ Response vs. reaction",
+                        description: "You may catch yourself before automatic responses and choose more intentional ways of engaging."
+                    },
+                    {
+                        title: "🌊 Growing confidence",
+                        description: "Your ability to follow through can build trust in yourself and create a foundation for bigger changes."
+                    }
+                ]
+            },
+            balance: {
+                title: "Finding Balance",
+                subtitle: "You might be identifying your core values and learning to align your daily choices with what actually matters to you.",
+                experiences: [
+                    {
+                        title: "💎 Values clarification",
+                        description: "You may be able to name what truly matters to you, beyond what you think should matter or what others expect."
+                    },
+                    {
+                        title: "🧭 Alignment practice",
+                        description: "You might actively work to match your daily choices with your identified values, even when it's difficult."
+                    },
+                    {
+                        title: "🛡️ Boundary setting",
+                        description: "You may find yourself saying no to things that don't align and yes to things that do, even when it creates temporary discomfort."
+                    },
+                    {
+                        title: "🧘 Satisfaction over achievement",
+                        description: "You might begin to distinguish between being productive and being fulfilled, choosing fulfillment more often."
+                    }
+                ]
+            },
+            leveling: {
+                title: "Building Skill-sets",
+                subtitle: "You might be developing capabilities that compound over time. You could be teaching others and integrating new skills into your identity.",
+                experiences: [
+                    {
+                        title: "🧬 Skill integration",
+                        description: "New capabilities may become part of how you see yourself, not just things you can do."
+                    },
+                    {
+                        title: "🔗 Compound learning",
+                        description: "Skills you develop might start supporting each other, creating accelerated growth and capability."
+                    },
+                    {
+                        title: "👨‍🏫 Teaching and sharing",
+                        description: "You may naturally help others develop similar skills, which can deepen your own understanding."
+                    },
+                    {
+                        title: "🧠 Strategic development",
+                        description: "You might choose which skills to develop based on long-term vision rather than immediate needs."
+                    }
+                ]
+            },
+            satisfied: {
+                title: "Leveling Up",
+                subtitle: "You might be leading transformation in others while maintaining your own growth. You could be operating at your highest capacity while helping others reach theirs.",
+                experiences: [
+                    {
+                        title: "🚀 Leadership emergence",
+                        description: "Others may naturally look to you for guidance and support in their own transformation journeys."
+                    },
+                    {
+                        title: "🔧 Systems thinking",
+                        description: "You might create processes and environments that support growth in yourself and others without constant personal attention."
+                    },
+                    {
+                        title: "🏆 Sustained excellence",
+                        description: "You may maintain high performance while staying connected to your values and well-being."
+                    },
+                    {
+                        title: "🌟 Generative impact",
+                        description: "Your growth might create conditions for others to grow, multiplying your influence beyond direct action."
+                    }
+                ]
+            }
+        };
+
+        function showThreshold(thresholdKey) {
+            const isMobile = window.innerWidth <= 768;
+            
+            if (isMobile) {
+                // Mobile behavior: toggle the clicked button
+                const mobileButton = document.querySelector(`.mobile-threshold-button[data-threshold="${thresholdKey}"]`);
+                
+                if (mobileButton) {
+                    // Check if this button is already expanded
+                    const isCurrentlyExpanded = mobileButton.classList.contains('expanded');
+                    
+                    // First, collapse all other buttons
+                    document.querySelectorAll('.mobile-threshold-button').forEach(button => {
+                        button.classList.remove('expanded', 'active');
+                    });
+                    
+                    // If it wasn't expanded, expand it. If it was expanded, leave it collapsed.
+                    if (!isCurrentlyExpanded) {
+                        mobileButton.classList.add('expanded', 'active');
+                    }
+                }
+            } else {
+                // Desktop behavior: update content area
+                // Update active states
+                document.querySelectorAll('.threshold-marker').forEach(marker => {
+                    marker.classList.remove('active');
+                });
+                
+                const desktopMarker = document.querySelector(`.threshold-marker[data-threshold="${thresholdKey}"]`);
+                if (desktopMarker) desktopMarker.classList.add('active');
+
+                // Get threshold data
+                const data = thresholdData[thresholdKey];
+                
+                // Build content and apply threshold color class
+                const content = document.getElementById('threshold-content');
+                content.className = `threshold-content ${thresholdKey}`; // Apply threshold-specific styling
+                content.innerHTML = `
+                    <div class="threshold-title">${data.title}</div>
+                    <div class="threshold-subtitle">${data.subtitle}</div>
+                    <div class="threshold-section">
+                        <h3>When you're in this threshold, you might experience:</h3>
+                        <ul class="experience-list">
+                            ${data.experiences.map(exp => {
+                                const emoji = exp.title.split(' ')[0]; // Extract emoji
+                                const titleWithoutEmoji = exp.title.substring(exp.title.indexOf(' ') + 1); // Get title without emoji
+                                return `
+                                    <li>
+                                        <div class="experience-emoji">${emoji}</div>
+                                        <div class="experience-content">
+                                            <div class="experience-title">${titleWithoutEmoji}</div>
+                                            <div class="experience-description">${exp.description}</div>
+                                        </div>
+                                    </li>
+                                `;
+                            }).join('')}
+                        </ul>
+                        <div class="threshold-cta">
+                            <a href="#contact" class="threshold-btn">Get Started</a>
+                        </div>
+                    </div>
+                `;
+                
+                // Scroll to content
+                content.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        // Add event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Desktop threshold markers
+            document.querySelectorAll('.threshold-marker').forEach(marker => {
+                marker.addEventListener('click', function() {
+                    const threshold = this.dataset.threshold;
+                    showThreshold(threshold);
+                });
+            });
+
+            // Mobile threshold buttons
+            document.querySelectorAll('.mobile-threshold-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const threshold = this.dataset.threshold;
+                    showThreshold(threshold);
+                });
+            });
+        });
+
+        // Testimonials Navigation
+        let currentTestimonialIndex = 0;
+        let testimonialCards = [];
+        let testimonialsTrack = null;
+        let totalTestimonials = 0;
+
+        function initTestimonials() {
+            testimonialCards = document.querySelectorAll('.testimonial-card');
+            testimonialsTrack = document.getElementById('testimonials-track');
+            totalTestimonials = testimonialCards.length;
+
+            if (testimonialsTrack && totalTestimonials > 0) {
+                updateTestimonialPosition();
+            }
+        }
+
+        function updateTestimonialPosition() {
+            if (!testimonialsTrack) return;
+            
+            const cardWidth = window.innerWidth <= 768 ? 332 : 432; // card width + gap (mobile vs desktop)
+            const offset = currentTestimonialIndex * cardWidth;
+            testimonialsTrack.style.transform = `translateX(-${offset}px)`;
+            
+            // Update button states
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+            
+            if (prevBtn) prevBtn.disabled = currentTestimonialIndex === 0;
+            if (nextBtn) nextBtn.disabled = currentTestimonialIndex >= totalTestimonials - 1;
+
+            // Update dots
+            updateDots();
+        }
+
+        function updateDots() {
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentTestimonialIndex);
+            });
+        }
+
+        function moveTestimonials(direction) {
+            if (!testimonialsTrack || totalTestimonials === 0) return;
+            
+            const maxIndex = totalTestimonials - 1; // Show 1 testimonial at a time
+            
+            if (direction === 1 && currentTestimonialIndex < maxIndex) {
+                currentTestimonialIndex++;
+            } else if (direction === -1 && currentTestimonialIndex > 0) {
+                currentTestimonialIndex--;
+            }
+            
+            updateTestimonialPosition();
+        }
+
+        function goToTestimonial(index) {
+            if (index >= 0 && index < totalTestimonials) {
+                currentTestimonialIndex = index;
+                updateTestimonialPosition();
+            }
+        }
+
+        // Initialize testimonials when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Small delay to ensure DOM is fully rendered
+            setTimeout(initTestimonials, 100);
+            
+            // Initialize contact form
+            initContactForm();
+            
+            // Initialize divider animations
+            initDividerAnimations();
+        });
+
+        // Divider Scroll Animations
+        function initDividerAnimations() {
+            const dividers = document.querySelectorAll('.spectrum-divider');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Coming into view - animate dots from left to center
+                        entry.target.classList.remove('animate-out');
+                        entry.target.classList.add('animate-in');
+                    } else {
+                        // Going out of view - animate dots from center to right
+                        entry.target.classList.remove('animate-in');
+                        entry.target.classList.add('animate-out');
+                    }
+                });
+            }, {
+                threshold: 0.5,
+                rootMargin: '-10% 0px -10% 0px'
+            });
+
+            dividers.forEach(divider => {
+                observer.observe(divider);
+            });
+        }
+
+        // Contact Form Handling
+        function initContactForm() {
+            const form = document.getElementById('contactForm');
+            if (form) {
+                form.addEventListener('submit', handleFormSubmission);
+            }
+        }
+
+        async function handleFormSubmission(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            
+            try {
+                const formData = new FormData(e.target);
+                const data = {
+                    firstName: formData.get('firstName'),
+                    lastName: formData.get('lastName'),
+                    email: formData.get('email'),
+                    phone: formData.get('phone'),
+                    impacted: formData.get('impacted'),
+                    threshold: formData.get('threshold'),
+                    message: formData.get('message'),
+                    newsletter: formData.get('newsletter') === 'on'
+                };
+                
+                // Here you would integrate with your email service (Formspree, Netlify Forms, etc.)
+                // and Kit.com newsletter signup
+                
+                // For now, we'll simulate the process
+                await simulateFormSubmission(data);
+                
+                // Show success message
+                showFormSuccess();
+                
+                // Reset form
+                e.target.reset();
+                
+            } catch (error) {
+                console.error('Form submission error:', error);
+                showFormError('There was an error sending your message. Please try again or email jim.karwisch@gmail.com directly.');
+            } finally {
+                // Reset button
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }
+        }
+
+        async function simulateFormSubmission(data) {
+            // This is where you'd integrate with your actual email service
+            // Examples: Formspree, Netlify Forms, EmailJS, etc.
+            
+            console.log('Form data to be sent:', data);
+            console.log('Would send emails to:', 'jim.karwisch@gmail.com', 'and', data.email);
+            console.log('Newsletter signup:', data.newsletter ? 'Yes' : 'No');
+            
+            // Simulate API call delay
+            await new Promise(resolve => setTimeout(resolve, 2000));
+        }
+
+        function showFormSuccess() {
+            const form = document.querySelector('.contact-form');
+            const successMessage = document.createElement('div');
+            successMessage.className = 'form-message success';
+            successMessage.innerHTML = `
+                <h3>Message Sent Successfully!</h3>
+                <p>Thank you for reaching out. I'll respond within 24 hours to schedule your complimentary discovery conversation.</p>
+                <p>Check your email for a confirmation message.</p>
+            `;
+            
+            form.appendChild(successMessage);
+            setTimeout(() => successMessage.remove(), 8000);
+        }
+
+        function showFormError(message) {
+            const form = document.querySelector('.contact-form');
+            const errorMessage = document.createElement('div');
+            errorMessage.className = 'form-message error';
+            errorMessage.innerHTML = `
+                <h3>Oops! Something went wrong.</h3>
+                <p>${message}</p>
+            `;
+            
+            form.appendChild(errorMessage);
+            setTimeout(() => errorMessage.remove(), 8000);
+        }
+    </script>
+
+    <div class="spectrum-divider">
+        <div class="divider-container">
+            <div class="divider-line">
+                <div class="divider-dot teal"></div>
+                <div class="divider-dot purple"></div>
+                <div class="divider-dot mauve"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <div class="testimonials-section" id="testimonials">
+        <div class="testimonials-container">
+            <h2 class="testimonials-title">What Our Clients Say</h2>
+            <div class="testimonials-slider">
+                <div class="testimonials-track" id="testimonials-track">
+                    <div class="testimonial-card">
+                        <p class="testimonial-quote">"Now, over a year later, I can honestly say that I'm living my dream. I'm leading my business, not running it. And I'm actively exploring and developing the wild ideas I've been thinking about for the past 20 years."</p>
+                        <div class="testimonial-author">
+                            <strong>Jesse Patel</strong>
+                            <span>Co-founder, Workflowy</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-quote">"Jim is able to (by magic, I guess) deeply understand my objectives and adapt his work to my personality to help me work consistently toward my goals."</p>
+                        <div class="testimonial-author">
+                            <strong>David Clark</strong>
+                            <span>Co-founder, Clockworks</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-quote">"I can't imagine a better testimony for Jim's work than my own career trajectory. I've been able to move from an entry level position to a Director-level position, nearly tripling my salary in the process."</p>
+                        <div class="testimonial-author">
+                            <strong>Josh Childers</strong>
+                            <span>Director of Operations, CrowdFiber</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-quote">"This has radically changed my life! I've been able to develop a healthier self esteem, and chase after goals and dreams I never imagined possible."</p>
+                        <div class="testimonial-author">
+                            <strong>Rachael Van Schepen</strong>
+                            <span>Music Producer & Artist</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-quote">"What I learned helped me step out of my comfort zone and unlock skills I didn't know I had in me. I learned a lot about myself."</p>
+                        <div class="testimonial-author">
+                            <strong>Tor Gundersen</strong>
+                            <span>Strategic Development Manager, Adobe</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-quote">"Jim helped me create a killer presentation out of a jumbled, wobbly, unyielding mess. He listened to me, helped me craft something in MY style."</p>
+                        <div class="testimonial-author">
+                            <strong>Justin Blackman</strong>
+                            <span>Brand Voice Expert, PrettyFlyCopy.com</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-navigation">
+                    <button class="testimonial-btn prev-btn" onclick="moveTestimonials(-1)">← Previous</button>
+                    <div class="testimonial-dots">
+                        <span class="dot active" onclick="goToTestimonial(0)"></span>
+                        <span class="dot" onclick="goToTestimonial(1)"></span>
+                        <span class="dot" onclick="goToTestimonial(2)"></span>
+                        <span class="dot" onclick="goToTestimonial(3)"></span>
+                        <span class="dot" onclick="goToTestimonial(4)"></span>
+                        <span class="dot" onclick="goToTestimonial(5)"></span>
+                    </div>
+                    <button class="testimonial-btn next-btn" onclick="moveTestimonials(1)">Next →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="spectrum-divider">
+        <div class="divider-container">
+            <div class="divider-line">
+                <div class="divider-dot teal"></div>
+                <div class="divider-dot purple"></div>
+                <div class="divider-dot mauve"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Jim Section -->
+    <div class="about-section">
+        <div class="about-container">
+            <h2 class="about-title">About Jim Karwisch</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    
+
+                <p>I’m Jim Karwisch, and I work with smart, capable people who feel stuck in ways that don’t make sense on paper.</p>
+                
+                <p>They have experience. They have ideas. They often have success already. What they are missing is traction. Something inside keeps pulling against the direction they want to move.</p>
+                
+                <p>My work focuses on that internal friction.</p>
+                
+                <p>Over the last decade, I’ve helped founders, leaders, creatives, and operators untangle the stories shaping how they think, decide, communicate, and act. Stories about responsibility. About confidence. About what they are allowed to want. About how much space they can take up. When those stories stay unexamined, progress stalls. When they are brought into the open, momentum returns.</p>
+                
+                <p>Untangled Narrative is built around a simple belief: clarity creates agency. When you can see the narrative you are operating from, you gain options. You can test new approaches instead of repeating old patterns. You can build skills instead of forcing outcomes. You can trust your judgment instead of outsourcing it.</p>
+                
+                <p>My background spans coaching, facilitation, narrative strategy, and skill-building across leadership, communication, decision-making, and emotional regulation. I do not hand clients answers. I help them develop the ability to think clearly under pressure, make aligned choices, and move forward without needing constant reassurance.</p>
+                
+                <p>The goal is durable change. Confidence that holds up in real conditions. Skills that compound. A sense of authorship over your own direction.</p>
+                
+                <p>That is the work.</p>
+                    
+                 
+                </div>
+                <div class="about-image">
+                    <img src="https://www.untanglednarrative.com/wp-content/uploads/2025/10/jiminchair-scaled.jpg" alt="Jim Karwisch" class="jim-photo">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="spectrum-divider">
+        <div class="divider-container">
+            <div class="divider-line">
+                <div class="divider-dot teal"></div>
+                <div class="divider-dot purple"></div>
+                <div class="divider-dot mauve"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Form Section -->
+    <div class="contact-section" id="contact">
+        <div class="contact-container">
+            <h2 class="contact-title">Ready to Transform Your Story?</h2>
+            <p class="contact-subtitle">Let's explore how narrative coaching can help you untangle what's holding you back and step into your next chapter.</p>
+            
+            <form class="contact-form" id="contactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name *</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name *</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+                
+                <div class="form-group">
+                    <label for="impacted">Who is being directly impacted by the work you are inquiring about?</label>
+                    <select id="impacted" name="impacted" required>
+                        <option value="">Please select...</option>
+                        <option value="individual-myself">Individual / Myself</option>
+                        <option value="individual-loved-one">Individual / A Loved One</option>
+                        <option value="my-team">My team</option>
+                        <option value="my-organization">My organization</option>
+                        <option value="my-clients">My clients/customers</option>
+                        <option value="multiple">Multiple groups</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="threshold">Current threshold? (<a href="#threshold-explorer" class="form-link">Use tool above if needed</a>)</label>
+                    <select id="threshold" name="threshold">
+                        <option value="">Please select...</option>
+                        <option value="tangled">Tangled - Feeling stuck and overwhelmed</option>
+                        <option value="hope">Hopeful and Curious - Starting to see possibility</option>
+                        <option value="untangling">Untangling - Experimenting with new approaches</option>
+                        <option value="agency">Building Skill-sets - Understanding areas to develop</option>
+                        <option value="balance">Finding Balance - Identifying what works</option>
+                        <option value="leveling">Leveling Up - Leading transformation in others</option>
+                        <option value="unsure">Not sure / Haven't explored yet</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">What brings you here? Tell me about your current situation and what you'd like to explore. *</label>
+                    <textarea id="message" name="message" rows="5" required placeholder="Share what's on your mind - what patterns are you noticing? What would you like to be different?"></textarea>
+                </div>
+                
+                <div class="form-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="newsletter" name="newsletter" checked>
+                        <span class="checkmark"></span>
+                        Yes, I'd like to receive insights and updates about narrative coaching (you can unsubscribe anytime)
+                    </label>
+                </div>
+                
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </div>
 
 </body>
 </html>
