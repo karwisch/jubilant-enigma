@@ -1640,6 +1640,109 @@
                 display: none;
             }
         }
+
+        /* I Want Animation Section */
+        .i-want-section {
+            background: var(--warm-white);
+            padding: 6rem 2rem;
+        }
+
+        .i-want-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .i-want-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .i-want-card {
+            background: white;
+            border: 3px solid var(--charcoal);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: left;
+        }
+
+        .i-want-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1.4;
+            color: var(--charcoal);
+        }
+
+        .cycling-word {
+            color: var(--teal);
+            transition: opacity 0.8s ease;
+        }
+
+        .cycling-word.fade-out {
+            opacity: 0;
+        }
+
+        /* Spectrum colors for cycling words */
+        .cycling-word.tangled { color: #d32f2f; }
+        .cycling-word.hopeful { color: #f57c00; }
+        .cycling-word.untangling { color: #fbc02d; }
+        .cycling-word.agency { color: var(--mauve); }
+        .cycling-word.balance { color: #a4789c; }
+        .cycling-word.skillsets { color: var(--teal); }
+        .cycling-word.leveling { color: var(--teal); }
+
+        .i-want-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: var(--charcoal);
+            opacity: 0.8;
+            margin-top: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .i-want-section {
+                padding: 4rem 1.5rem;
+            }
+
+            .i-want-title {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .i-want-card {
+                padding: 2rem;
+            }
+
+            .i-want-text {
+                font-size: 1.6rem;
+            }
+
+            .i-want-subtitle {
+                font-size: 1.1rem;
+                margin-top: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .i-want-text {
+                font-size: 1.4rem;
+            }
+
+            .i-want-card {
+                padding: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1673,6 +1776,34 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="spectrum-divider">
+        <div class="divider-container">
+            <div class="divider-line">
+                <div class="divider-dot teal"></div>
+                <div class="divider-dot purple"></div>
+                <div class="divider-dot mauve"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- I Want Animation Section -->
+    <div class="i-want-section">
+        <div class="i-want-container">
+            <h2 class="i-want-title">Where Are You Right Now?</h2>
+
+            <div class="i-want-card">
+                <div class="i-want-text">
+                    I want <span class="cycling-word" id="cycling-text">to stop feeling stuck</span>
+                </div>
+            </div>
+
+            <p class="i-want-subtitle">
+                Wherever you are in your journey, there's a next step that makes sense.
+                Our assessment helps you identify exactly where you are and what comes next.
+            </p>
         </div>
     </div>
 
@@ -2629,6 +2760,98 @@
             </form>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cyclingText = document.getElementById('cycling-text');
+
+            // All statements with their threshold colors
+            const statements = [
+                // Tangled - Red
+                { text: "to stop feeling stuck", color: "tangled" },
+                { text: "to break these patterns", color: "tangled" },
+                { text: "some momentum", color: "tangled" },
+
+                // Hopeful and Curious - Orange
+                { text: "to explore what's possible", color: "hopeful" },
+                { text: "to learn from others", color: "hopeful" },
+                { text: "to believe change works", color: "hopeful" },
+
+                // Actively Untangling - Yellow
+                { text: "alternatives that work", color: "untangling" },
+                { text: "confidence in change", color: "untangling" },
+                { text: "to experiment safely", color: "untangling" },
+
+                // Building Agency - Mauve
+                { text: "to control what I can", color: "agency" },
+                { text: "consistent habits", color: "agency" },
+                { text: "to feel capable", color: "agency" },
+
+                // Finding Balance - Purple
+                { text: "alignment with my values", color: "balance" },
+                { text: "fulfillment, not just function", color: "balance" },
+                { text: "guilt-free boundaries", color: "balance" },
+
+                // Building Skill-sets - Teal
+                { text: "capabilities that compound", color: "skillsets" },
+                { text: "to teach others", color: "skillsets" },
+                { text: "sustainable growth", color: "skillsets" },
+
+                // Leveling Up - Teal
+                { text: "to lead transformation", color: "leveling" },
+                { text: "to build lasting impact", color: "leveling" },
+                { text: "to help others unlock potential", color: "leveling" }
+            ];
+
+            // Shuffle function
+            function shuffleArray(array) {
+                const shuffled = [...array];
+                for (let i = shuffled.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+                }
+                return shuffled;
+            }
+
+            let randomizedStatements = shuffleArray(statements);
+            let currentIndex = 0;
+
+            // Set initial statement
+            const initialStatement = randomizedStatements[0];
+            cyclingText.textContent = initialStatement.text;
+            cyclingText.classList.add(initialStatement.color);
+
+            function changeText() {
+                // Fade out
+                cyclingText.classList.add('fade-out');
+
+                setTimeout(() => {
+                    // Move to next statement
+                    currentIndex = (currentIndex + 1) % randomizedStatements.length;
+
+                    // Reshuffle when we complete a cycle
+                    if (currentIndex === 0) {
+                        randomizedStatements = shuffleArray(statements);
+                    }
+
+                    const currentStatement = randomizedStatements[currentIndex];
+
+                    // Remove all color classes
+                    cyclingText.classList.remove('tangled', 'hopeful', 'untangling', 'agency', 'balance', 'skillsets', 'leveling');
+
+                    // Update text and color
+                    cyclingText.textContent = currentStatement.text;
+                    cyclingText.classList.add(currentStatement.color);
+
+                    // Fade in
+                    cyclingText.classList.remove('fade-out');
+                }, 400);
+            }
+
+            // Start animation
+            setInterval(changeText, 3000);
+        });
+    </script>
 
 </body>
 </html>
