@@ -1738,6 +1738,40 @@
             text-align: center;
         }
 
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 50px;
+            height: 50px;
+            background: var(--teal);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(27, 127, 146, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--light-teal);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(27, 127, 146, 0.5);
+        }
+
         @media (max-width: 768px) {
             .i-want-section {
                 padding: 4rem 1.5rem;
@@ -1782,9 +1816,11 @@
                 </a>
             </div>
             <div class="nav-links">
+                <a href="#where-are-you">Where Are You?</a>
+                <a href="#threshold-explorer">Threshold Explorer</a>
                 <a href="#testimonials">Testimonials</a>
-                <a href="#contact">Contact</a>
                 <a href="#about">About Jim</a>
+                <a href="#contact">Contact</a>
                 <a href="https://www.untanglednarrative.com/blog/">Blog</a>
             </div>
         </div>
@@ -1818,7 +1854,7 @@
     </div>
 
     <!-- I Want Animation Section -->
-    <div class="i-want-section">
+    <div class="i-want-section" id="where-are-you">
         <div class="i-want-container">
             <h2 class="i-want-title">Where Are You Right Now?</h2>
 
@@ -3003,7 +3039,34 @@
                 dividerObserver.observe(divider);
             });
         });
+
+        // Back to Top Button
+        document.addEventListener('DOMContentLoaded', function() {
+            const backToTopButton = document.getElementById('backToTop');
+
+            // Show/hide button based on scroll position
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('show');
+                } else {
+                    backToTopButton.classList.remove('show');
+                }
+            });
+
+            // Scroll to top when button is clicked
+            backToTopButton.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
     </script>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top" aria-label="Back to top">
+        ↑
+    </button>
 
 </body>
 </html>
