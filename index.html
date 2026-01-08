@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Untangled Narrative, LLC</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://www.google.com/recaptcha/api.js?render=6Ley1Q0sAAAAAHifeiz4rUB36_hO4MqP1VuhxMhk"></script>
     <style>
         :root {
             --teal: #1B7F92;
@@ -2476,14 +2477,14 @@
 
         async function handleFormSubmission(e) {
             e.preventDefault();
-            
+
             const submitBtn = document.querySelector('.submit-btn');
             const originalText = submitBtn.textContent;
-            
+
             // Show loading state
             submitBtn.disabled = true;
-            submitBtn.textContent = 'Sending...';
-            
+            submitBtn.textContent = '⏳ Verifying...';
+
             try {
                 const formData = new FormData(e.target);
                 const data = {
@@ -2496,39 +2497,81 @@
                     message: formData.get('message'),
                     newsletter: formData.get('newsletter') === 'on'
                 };
-                
-                // Here you would integrate with your email service (Formspree, Netlify Forms, etc.)
-                // and Kit.com newsletter signup
-                
-                // For now, we'll simulate the process
-                await simulateFormSubmission(data);
-                
-                // Show success message
-                showFormSuccess();
-                
-                // Reset form
-                e.target.reset();
-                
+
+                // Execute reCAPTCHA v3
+                grecaptcha.ready(function() {
+                    grecaptcha.execute('6Ley1Q0sAAAAAHifeiz4rUB36_hO4MqP1VuhxMhk', {action: 'submit'}).then(async function(token) {
+                        try {
+                            submitBtn.textContent = '⏳ Sending...';
+
+                            // Add reCAPTCHA token to data
+                            data.recaptchaToken = token;
+                            data.timestamp = new Date().toISOString();
+
+                            // Send to Google Apps Script
+                            const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwXO0lo9NpQ4nqHVeEgkQHv0OkUrD6uixF4u3ixxqrKPNoJPQCLmi4HSybp7XWqeSp0/exec';
+
+                            const promises = [
+                                fetch(GOOGLE_SCRIPT_URL, {
+                                    method: 'POST',
+                                    mode: 'no-cors',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify(data)
+                                })
+                            ];
+
+                            // If newsletter is checked, add to Kit.com
+                            if (data.newsletter) {
+                                const kitData = {
+                                    api_key: 'aDCVkSEacBae-dcX7SXANw',
+                                    email: data.email,
+                                    first_name: data.firstName,
+                                    fields: {
+                                        last_name: data.lastName,
+                                        contact_date: data.timestamp.split('T')[0]
+                                    }
+                                };
+
+                                promises.push(
+                                    fetch('https://api.convertkit.com/v3/forms/7966444/subscribe', {
+                                        method: 'POST',
+                                        headers: { 'Content-Type': 'application/json' },
+                                        body: JSON.stringify(kitData)
+                                    })
+                                );
+                            }
+
+                            // Execute all requests
+                            await Promise.all(promises);
+
+                            // Show success message
+                            showFormSuccess();
+
+                            // Reset form
+                            e.target.reset();
+
+                        } catch (error) {
+                            console.error('Form submission error:', error);
+                            showFormError('There was an error sending your message. Please try again or email jim.karwisch@gmail.com directly.');
+                        } finally {
+                            // Reset button
+                            submitBtn.disabled = false;
+                            submitBtn.textContent = originalText;
+                        }
+                    }).catch((error) => {
+                        console.error('reCAPTCHA error:', error);
+                        showFormError('Security verification failed. Please try again.');
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = originalText;
+                    });
+                });
+
             } catch (error) {
                 console.error('Form submission error:', error);
                 showFormError('There was an error sending your message. Please try again or email jim.karwisch@gmail.com directly.');
-            } finally {
-                // Reset button
                 submitBtn.disabled = false;
                 submitBtn.textContent = originalText;
             }
-        }
-
-        async function simulateFormSubmission(data) {
-            // This is where you'd integrate with your actual email service
-            // Examples: Formspree, Netlify Forms, EmailJS, etc.
-            
-            console.log('Form data to be sent:', data);
-            console.log('Would send emails to:', 'jim.karwisch@gmail.com', 'and', data.email);
-            console.log('Newsletter signup:', data.newsletter ? 'Yes' : 'No');
-            
-            // Simulate API call delay
-            await new Promise(resolve => setTimeout(resolve, 2000));
         }
 
         function showFormSuccess() {
