@@ -276,68 +276,66 @@
         /* Scroll Animation Classes for Dividers */
         .spectrum-divider .divider-dot {
             transform: translateX(100vw);
-            transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .spectrum-divider .divider-dot.teal {
-            transition-delay: 0.1s;
+            transition-delay: 0s;
         }
 
         .spectrum-divider .divider-dot.purple {
-            transition-delay: 0.2s;
+            transition-delay: 0.15s;
         }
 
         .spectrum-divider .divider-dot.mauve {
             transition-delay: 0.3s;
         }
 
-        /* Animate in - dots move to center */
-        .spectrum-divider.animate-in .divider-dot {
+        /* Visible - dots at center */
+        .spectrum-divider.visible .divider-dot {
             transform: translateX(0);
         }
 
-        /* Animate out to right - when scrolling down away */
-        .spectrum-divider.animate-out-right .divider-dot {
+        /* Exit right - when scrolling down past */
+        .spectrum-divider.exit-right .divider-dot {
             transform: translateX(100vw);
+        }
+
+        .spectrum-divider.exit-right .divider-dot.teal {
             transition-delay: 0s;
         }
 
-        .spectrum-divider.animate-out-right .divider-dot.teal {
-            transition-delay: 0.1s;
+        .spectrum-divider.exit-right .divider-dot.purple {
+            transition-delay: 0.15s;
         }
 
-        .spectrum-divider.animate-out-right .divider-dot.purple {
-            transition-delay: 0.2s;
-        }
-
-        .spectrum-divider.animate-out-right .divider-dot.mauve {
+        .spectrum-divider.exit-right .divider-dot.mauve {
             transition-delay: 0.3s;
         }
 
-        /* Enter from left - when scrolling up */
-        .spectrum-divider.from-left .divider-dot {
+        /* Enter from left - when scrolling up into view */
+        .spectrum-divider.enter-left .divider-dot {
             transform: translateX(-100vw);
         }
 
-        .spectrum-divider.from-left.animate-in .divider-dot {
+        .spectrum-divider.enter-left.visible .divider-dot {
             transform: translateX(0);
         }
 
-        /* Animate out to left - when scrolling up away */
-        .spectrum-divider.animate-out-left .divider-dot {
+        /* Exit left - when scrolling up past */
+        .spectrum-divider.exit-left .divider-dot {
             transform: translateX(-100vw);
+        }
+
+        .spectrum-divider.exit-left .divider-dot.teal {
             transition-delay: 0s;
         }
 
-        .spectrum-divider.animate-out-left .divider-dot.teal {
-            transition-delay: 0.1s;
+        .spectrum-divider.exit-left .divider-dot.purple {
+            transition-delay: 0.15s;
         }
 
-        .spectrum-divider.animate-out-left .divider-dot.purple {
-            transition-delay: 0.2s;
-        }
-
-        .spectrum-divider.animate-out-left .divider-dot.mauve {
+        .spectrum-divider.exit-left .divider-dot.mauve {
             transition-delay: 0.3s;
         }
 
@@ -2941,73 +2939,59 @@
             let lastScrollY = window.scrollY;
             let scrollDirection = 'down';
             const dividers = document.querySelectorAll('.spectrum-divider');
-            const dividerStates = new Map();
 
-            // Initialize state for each divider
-            dividers.forEach((divider, index) => {
-                dividerStates.set(divider, {
-                    hasAnimated: false,
-                    isVisible: false,
-                    lastDirection: null
-                });
-            });
-
-            // Track scroll direction
-            let ticking = false;
+            // Track scroll direction in real-time
             window.addEventListener('scroll', () => {
-                if (!ticking) {
-                    window.requestAnimationFrame(() => {
-                        const currentScrollY = window.scrollY;
-                        scrollDirection = currentScrollY > lastScrollY ? 'down' : 'up';
-                        lastScrollY = currentScrollY;
-                        ticking = false;
-                    });
-                    ticking = true;
-                }
-            });
+                const currentScrollY = window.scrollY;
+                scrollDirection = currentScrollY > lastScrollY ? 'down' : 'up';
+                lastScrollY = currentScrollY;
+            }, { passive: true });
 
             // Intersection Observer for dividers
             const observerOptions = {
                 root: null,
-                rootMargin: '0px',
-                threshold: [0, 0.1, 0.5, 0.9, 1.0]
+                rootMargin: '-10% 0px -10% 0px', // Trigger a bit before fully in view
+                threshold: [0, 0.3, 0.7, 1.0]
             };
 
             const dividerObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     const divider = entry.target;
-                    const state = dividerStates.get(divider);
                     const ratio = entry.intersectionRatio;
 
-                    // Entering viewport
-                    if (entry.isIntersecting && ratio >= 0.1) {
-                        state.isVisible = true;
+                    // Entering viewport - circles come to center
+                    if (entry.isIntersecting && ratio > 0.3) {
+                        // Clear any exit classes
+                        divider.classList.remove('exit-right', 'exit-left');
 
-                        // Remove all animation classes first
-                        divider.classList.remove('animate-out-right', 'animate-out-left', 'from-left');
-
-                        // Set entry direction based on scroll direction
+                        // Set entry direction
                         if (scrollDirection === 'up') {
-                            divider.classList.add('from-left');
+                            // Scrolling up: enter from left
+                            divider.classList.add('enter-left');
+                        } else {
+                            // Scrolling down: enter from right (default)
+                            divider.classList.remove('enter-left');
                         }
 
-                        // Trigger entrance animation
+                        // Animate to center
                         setTimeout(() => {
-                            divider.classList.add('animate-in');
-                            state.hasAnimated = true;
-                            state.lastDirection = scrollDirection;
+                            divider.classList.add('visible');
                         }, 50);
                     }
-                    // Leaving viewport
-                    else if (state.isVisible && ratio < 0.5) {
-                        state.isVisible = false;
-                        divider.classList.remove('animate-in');
+                    // Leaving viewport - circles exit
+                    else if (!entry.isIntersecting || ratio < 0.3) {
+                        // Remove visible state
+                        divider.classList.remove('visible');
 
-                        // Exit in the direction of scroll
+                        // Set exit direction based on scroll
                         if (scrollDirection === 'down') {
-                            divider.classList.add('animate-out-right');
+                            // Scrolling down: exit to right
+                            divider.classList.remove('exit-left', 'enter-left');
+                            divider.classList.add('exit-right');
                         } else {
-                            divider.classList.add('animate-out-left');
+                            // Scrolling up: exit to left
+                            divider.classList.remove('exit-right', 'enter-left');
+                            divider.classList.add('exit-left');
                         }
                     }
                 });
