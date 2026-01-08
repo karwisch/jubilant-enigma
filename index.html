@@ -275,7 +275,7 @@
 
         /* Scroll Animation Classes for Dividers */
         .spectrum-divider .divider-dot {
-            transform: translateX(100vw);
+            transform: translateX(-100vw);
             transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -313,12 +313,12 @@
             transition-delay: 0.3s;
         }
 
-        /* Enter from left - when scrolling up into view */
-        .spectrum-divider.enter-left .divider-dot {
-            transform: translateX(-100vw);
+        /* Enter from right - when scrolling up into view */
+        .spectrum-divider.enter-right .divider-dot {
+            transform: translateX(100vw);
         }
 
-        .spectrum-divider.enter-left.visible .divider-dot {
+        .spectrum-divider.enter-right.visible .divider-dot {
             transform: translateX(0);
         }
 
@@ -2966,11 +2966,11 @@
 
                         // Set entry direction
                         if (scrollDirection === 'up') {
-                            // Scrolling up: enter from left
-                            divider.classList.add('enter-left');
+                            // Scrolling up: enter from right
+                            divider.classList.add('enter-right');
                         } else {
-                            // Scrolling down: enter from right (default)
-                            divider.classList.remove('enter-left');
+                            // Scrolling down: enter from left (default)
+                            divider.classList.remove('enter-right');
                         }
 
                         // Animate to center
@@ -2986,11 +2986,11 @@
                         // Set exit direction based on scroll
                         if (scrollDirection === 'down') {
                             // Scrolling down: exit to right
-                            divider.classList.remove('exit-left', 'enter-left');
+                            divider.classList.remove('exit-left', 'enter-right');
                             divider.classList.add('exit-right');
                         } else {
                             // Scrolling up: exit to left
-                            divider.classList.remove('exit-right', 'enter-left');
+                            divider.classList.remove('exit-right', 'enter-right');
                             divider.classList.add('exit-left');
                         }
                     }
