@@ -2508,6 +2508,11 @@
                             data.recaptchaToken = token;
                             data.timestamp = new Date().toISOString();
 
+                            // DEBUG: Log what we're sending
+                            console.log('=== FORM SUBMISSION DEBUG ===');
+                            console.log('Data being sent:', data);
+                            console.log('Google Script URL:', 'https://script.google.com/macros/s/AKfycbwXO0lo9NpQ4nqHVeEgkQHv0OkUrD6uixF4u3ixxqrKPNoJPQCLmi4HSybp7XWqeSp0/exec');
+
                             // Send to Google Apps Script
                             const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwXO0lo9NpQ4nqHVeEgkQHv0OkUrD6uixF4u3ixxqrKPNoJPQCLmi4HSybp7XWqeSp0/exec';
 
@@ -2517,6 +2522,10 @@
                                     mode: 'no-cors',
                                     headers: { 'Content-Type': 'application/json' },
                                     body: JSON.stringify(data)
+                                }).then(() => {
+                                    console.log('✓ Google Script fetch completed (no-cors mode)');
+                                }).catch(err => {
+                                    console.error('✗ Google Script fetch error:', err);
                                 })
                             ];
 
