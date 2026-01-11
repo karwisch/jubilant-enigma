@@ -57,7 +57,7 @@
         }
         
         .header h1 {
-            color: var(--teal);
+            color: var(--charcoal);
             font-size: 1.8em;
             font-weight: 700;
             margin-bottom: 8px;
@@ -92,11 +92,20 @@
         .category-title {
             font-size: 1.2em;
             font-weight: bold;
-            color: var(--teal);
-            margin-bottom: 15px;
+            color: var(--mauve);
+            margin-bottom: 8px;
             padding-bottom: 8px;
             border-bottom: 3px solid var(--mauve);
             font-family: 'Montserrat', sans-serif;
+        }
+        
+        .phase-description {
+            font-size: 0.85em;
+            color: var(--charcoal);
+            opacity: 0.7;
+            margin-bottom: 15px;
+            font-style: italic;
+            padding-left: 5px;
         }
         
         .criteria-item {
@@ -138,6 +147,7 @@
             transition: all 0.2s ease;
             color: var(--charcoal);
             font-weight: 500;
+            position: relative;
         }
         
         .option-btn:hover {
@@ -153,6 +163,62 @@
             box-shadow: 0 4px 8px var(--shadow-teal);
         }
         
+        /* Educational tooltips */
+        .tooltip-display {
+            position: absolute;
+            background: linear-gradient(135deg, var(--charcoal), #1a1a1a);
+            color: var(--warm-white);
+            padding: 12px 16px;
+            border-radius: 8px;
+            border-left: 4px solid var(--teal);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            z-index: 1000;
+            font-size: 0.85em;
+            line-height: 1.4;
+            max-width: 350px;
+            min-width: 280px;
+        }
+        
+        .tooltip-display.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .tooltip-display::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 20px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 8px solid var(--charcoal);
+        }
+        
+        .tooltip-title {
+            font-weight: bold;
+            color: var(--warm-white);
+            margin-bottom: 5px;
+            font-size: 0.95em;
+        }
+        
+        .tooltip-description {
+            margin-bottom: 6px;
+            color: var(--warm-white);
+        }
+        
+        .tooltip-evaluation {
+            font-style: italic;
+            opacity: 0.9;
+            font-size: 0.8em;
+            color: var(--warm-white);
+        }
+        
         .results-section {
             width: 45%;
             background: linear-gradient(135deg, var(--teal) 0%, var(--mauve) 100%);
@@ -164,6 +230,31 @@
             right: 0;
             top: 120px;
             transition: background 0.5s ease;
+        }
+        
+        .results-section.lukewarm-theme {
+            color: var(--charcoal) !important;
+        }
+        
+        .results-section.lukewarm-theme * {
+            color: var(--charcoal) !important;
+        }
+        
+        .results-section.lukewarm-theme .recommendation-box {
+            border-color: rgba(42, 42, 42, 0.3);
+        }
+        
+        .results-section.lukewarm-theme .next-actions {
+            border-color: rgba(42, 42, 42, 0.3);
+        }
+        
+        .results-section.lukewarm-theme .next-actions li:before {
+            color: var(--charcoal) !important;
+        }
+        
+        .results-section.lukewarm-theme .metric-card {
+            color: var(--charcoal) !important;
+            border-color: rgba(42, 42, 42, 0.3);
         }
         
         .temperature-display {
@@ -442,6 +533,21 @@
                 /* Remove sticky positioning on mobile */
             }
             
+            .tooltip-display {
+                max-width: 280px;
+                min-width: 250px;
+                padding: 10px 14px;
+                font-size: 0.8em;
+            }
+            
+            .tooltip-title {
+                font-size: 0.9em;
+            }
+            
+            .tooltip-evaluation {
+                font-size: 0.75em;
+            }
+            
             .header h1 {
                 font-size: 1.4em;
             }
@@ -463,127 +569,124 @@
             <div class="criteria-section">
                 
                 <div class="criteria-category">
-                    <div class="category-title">Relationship & Connection</div>
+                    <div class="category-title">Phase 1: Basic Qualifying</div>
+                    <div class="phase-description">These questions can typically be answered in your first interaction</div>
                     
                     <div class="criteria-item">
                         <div class="criteria-label">How did they find you?</div>
                         <div class="criteria-options">
-                            <button class="option-btn" data-category="source" data-value="5">Referral from client</button>
-                            <button class="option-btn" data-category="source" data-value="4">Partner recommendation</button>
-                            <button class="option-btn" data-category="source" data-value="3">Speaking/workshop</button>
-                            <button class="option-btn" data-category="source" data-value="2">Content/LinkedIn</button>
-                            <button class="option-btn" data-category="source" data-value="1">Cold search</button>
+                            <button class="option-btn" data-category="source" data-value="referral">Referral from client</button>
+                            <button class="option-btn" data-category="source" data-value="partner">Partner recommendation</button>
+                            <button class="option-btn" data-category="source" data-value="networking">Networking</button>
+                            <button class="option-btn" data-category="source" data-value="speaking">Speaking/workshop</button>
+                            <button class="option-btn" data-category="source" data-value="content">Content/LinkedIn</button>
+                            <button class="option-btn" data-category="source" data-value="marketing">Marketing/Advertising</button>
+                            <button class="option-btn" data-category="source" data-value="paid">Paid Promotion</button>
+                            <button class="option-btn" data-category="source" data-value="cold">Cold search</button>
                         </div>
                     </div>
                     
                     <div class="criteria-item">
                         <div class="criteria-label">Existing relationship?</div>
                         <div class="criteria-options">
-                            <button class="option-btn" data-category="relationship" data-value="5">Close connection</button>
-                            <button class="option-btn" data-category="relationship" data-value="4">Previous interaction</button>
-                            <button class="option-btn" data-category="relationship" data-value="3">Mutual connections</button>
-                            <button class="option-btn" data-category="relationship" data-value="2">Aware of my work</button>
-                            <button class="option-btn" data-category="relationship" data-value="1">No prior connection</button>
+                            <button class="option-btn" data-category="relationship" data-value="close">Close connection</button>
+                            <button class="option-btn" data-category="relationship" data-value="previous">Previous interaction</button>
+                            <button class="option-btn" data-category="relationship" data-value="mutual">Mutual connections</button>
+                            <button class="option-btn" data-category="relationship" data-value="aware">Aware of my work</button>
+                            <button class="option-btn" data-category="relationship" data-value="none">No prior connection</button>
                         </div>
                     </div>
-                    
-                    <div class="criteria-item">
-                        <div class="criteria-label">Decision-making authority?</div>
-                        <div class="criteria-options">
-                            <button class="option-btn" data-category="authority" data-value="5">Final decision maker</button>
-                            <button class="option-btn" data-category="authority" data-value="4">Strong influence</button>
-                            <button class="option-btn" data-category="authority" data-value="3">Part of committee</button>
-                            <button class="option-btn" data-category="authority" data-value="2">Makes recommendation</button>
-                            <button class="option-btn" data-category="authority" data-value="1">No authority</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="criteria-category">
-                    <div class="category-title">Need & Urgency</div>
                     
                     <div class="criteria-item">
                         <div class="criteria-label">Problem urgency?</div>
                         <div class="criteria-options">
-                            <button class="option-btn" data-category="urgency" data-value="5">Crisis mode</button>
-                            <button class="option-btn" data-category="urgency" data-value="4">Urgent timeline</button>
-                            <button class="option-btn" data-category="urgency" data-value="3">Planned initiative</button>
-                            <button class="option-btn" data-category="urgency" data-value="2">Future consideration</button>
-                            <button class="option-btn" data-category="urgency" data-value="1">Just exploring</button>
+                            <button class="option-btn" data-category="urgency" data-value="crisis">Crisis mode</button>
+                            <button class="option-btn" data-category="urgency" data-value="urgent">Urgent timeline</button>
+                            <button class="option-btn" data-category="urgency" data-value="planned">Planned initiative</button>
+                            <button class="option-btn" data-category="urgency" data-value="future">Future consideration</button>
+                            <button class="option-btn" data-category="urgency" data-value="exploring">Just exploring</button>
                         </div>
                     </div>
                     
                     <div class="criteria-item">
-                        <div class="criteria-label">Type of need?</div>
+                        <div class="criteria-label">Communication style?</div>
                         <div class="criteria-options">
-                            <button class="option-btn" data-category="need_type" data-value="5">Strategic consulting</button>
-                            <button class="option-btn" data-category="need_type" data-value="4">Problem solving</button>
-                            <button class="option-btn" data-category="need_type" data-value="3">Process improvement</button>
-                            <button class="option-btn" data-category="need_type" data-value="2">Training/development</button>
-                            <button class="option-btn" data-category="need_type" data-value="1">Basic execution</button>
+                            <button class="option-btn" data-category="communication" data-value="strategic">Strategic dialogue</button>
+                            <button class="option-btn" data-category="communication" data-value="thoughtful">Thoughtful questions</button>
+                            <button class="option-btn" data-category="communication" data-value="good">Good back-and-forth</button>
+                            <button class="option-btn" data-category="communication" data-value="basic">Basic responses</button>
+                            <button class="option-btn" data-category="communication" data-value="oneway">One-way requests</button>
                         </div>
                     </div>
                     
                     <div class="criteria-item">
                         <div class="criteria-label">Pain vs Vision buyer?</div>
                         <div class="criteria-options">
-                            <button class="option-btn" data-category="motivation" data-value="5">Vision-driven growth</button>
-                            <button class="option-btn" data-category="motivation" data-value="4">Strategic opportunity</button>
-                            <button class="option-btn" data-category="motivation" data-value="3">Mixed pain/vision</button>
-                            <button class="option-btn" data-category="motivation" data-value="2">Problem-reactive</button>
-                            <button class="option-btn" data-category="motivation" data-value="1">Crisis-reactive</button>
+                            <button class="option-btn" data-category="motivation" data-value="vision">Vision-driven growth</button>
+                            <button class="option-btn" data-category="motivation" data-value="opportunity">Strategic opportunity</button>
+                            <button class="option-btn" data-category="motivation" data-value="mixed">Mixed pain/vision</button>
+                            <button class="option-btn" data-category="motivation" data-value="reactive">Problem-reactive</button>
+                            <button class="option-btn" data-category="motivation" data-value="crisis_reactive">Crisis-reactive</button>
                         </div>
                     </div>
                 </div>
                 
                 <div class="criteria-category">
-                    <div class="category-title">Budget & Investment Mindset</div>
+                    <div class="category-title">Phase 2: Discovery Questions</div>
+                    <div class="phase-description">These require deeper conversation and may not be known initially</div>
+                    
+                    <div class="criteria-item">
+                        <div class="criteria-label">Decision-making authority?</div>
+                        <div class="criteria-options">
+                            <button class="option-btn" data-category="authority" data-value="final">Final decision maker</button>
+                            <button class="option-btn" data-category="authority" data-value="influence">Strong influence</button>
+                            <button class="option-btn" data-category="authority" data-value="committee">Part of committee</button>
+                            <button class="option-btn" data-category="authority" data-value="recommend">Makes recommendation</button>
+                            <button class="option-btn" data-category="authority" data-value="none">No authority</button>
+                        </div>
+                    </div>
+                    
+                    <div class="criteria-item">
+                        <div class="criteria-label">Type of need?</div>
+                        <div class="criteria-options">
+                            <button class="option-btn" data-category="need_type" data-value="strategic">Strategic consulting</button>
+                            <button class="option-btn" data-category="need_type" data-value="problem">Problem solving</button>
+                            <button class="option-btn" data-category="need_type" data-value="process">Process improvement</button>
+                            <button class="option-btn" data-category="need_type" data-value="training">Training/development</button>
+                            <button class="option-btn" data-category="need_type" data-value="execution">Basic execution</button>
+                        </div>
+                    </div>
                     
                     <div class="criteria-item">
                         <div class="criteria-label">Budget discussions?</div>
                         <div class="criteria-options">
-                            <button class="option-btn" data-category="budget" data-value="5">Clear budget allocated</button>
-                            <button class="option-btn" data-category="budget" data-value="4">Investment mindset</button>
-                            <button class="option-btn" data-category="budget" data-value="3">Needs approval</button>
-                            <button class="option-btn" data-category="budget" data-value="2">Price conscious</button>
-                            <button class="option-btn" data-category="budget" data-value="1">Cost-focused</button>
-                        </div>
-                    </div>
-                    
-                    <div class="criteria-item">
-                        <div class="criteria-label">Previous consultant experience?</div>
-                        <div class="criteria-options">
-                            <button class="option-btn" data-category="experience" data-value="5">Values strategic expertise</button>
-                            <button class="option-btn" data-category="experience" data-value="4">Positive past experience</button>
-                            <button class="option-btn" data-category="experience" data-value="3">Mixed experiences</button>
-                            <button class="option-btn" data-category="experience" data-value="2">Skeptical but open</button>
-                            <button class="option-btn" data-category="experience" data-value="1">Been burned before</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="criteria-category">
-                    <div class="category-title">Engagement Quality</div>
-                    
-                    <div class="criteria-item">
-                        <div class="criteria-label">Communication style?</div>
-                        <div class="criteria-options">
-                            <button class="option-btn" data-category="communication" data-value="5">Strategic dialogue</button>
-                            <button class="option-btn" data-category="communication" data-value="4">Thoughtful questions</button>
-                            <button class="option-btn" data-category="communication" data-value="3">Good back-and-forth</button>
-                            <button class="option-btn" data-category="communication" data-value="2">Basic responses</button>
-                            <button class="option-btn" data-category="communication" data-value="1">One-way requests</button>
+                            <button class="option-btn" data-category="budget" data-value="allocated">Clear budget allocated</button>
+                            <button class="option-btn" data-category="budget" data-value="investment">Investment mindset</button>
+                            <button class="option-btn" data-category="budget" data-value="approval">Needs approval</button>
+                            <button class="option-btn" data-category="budget" data-value="conscious">Price conscious</button>
+                            <button class="option-btn" data-category="budget" data-value="focused">Cost-focused</button>
                         </div>
                     </div>
                     
                     <div class="criteria-item">
                         <div class="criteria-label">Timeline expectations?</div>
                         <div class="criteria-options">
-                            <button class="option-btn" data-category="timeline" data-value="5">Ready to start soon</button>
-                            <button class="option-btn" data-category="timeline" data-value="4">Next 30-60 days</button>
-                            <button class="option-btn" data-category="timeline" data-value="3">Next quarter</button>
-                            <button class="option-btn" data-category="timeline" data-value="2">Sometime this year</button>
-                            <button class="option-btn" data-category="timeline" data-value="1">Just exploring</button>
+                            <button class="option-btn" data-category="timeline" data-value="ready">Ready to start soon</button>
+                            <button class="option-btn" data-category="timeline" data-value="nearterm">Next 30-60 days</button>
+                            <button class="option-btn" data-category="timeline" data-value="quarter">Next quarter</button>
+                            <button class="option-btn" data-category="timeline" data-value="year">Sometime this year</button>
+                            <button class="option-btn" data-category="timeline" data-value="exploring">Just exploring</button>
+                        </div>
+                    </div>
+                    
+                    <div class="criteria-item">
+                        <div class="criteria-label">Previous consultant experience?</div>
+                        <div class="criteria-options">
+                            <button class="option-btn" data-category="experience" data-value="values">Values strategic expertise</button>
+                            <button class="option-btn" data-category="experience" data-value="positive">Positive past experience</button>
+                            <button class="option-btn" data-category="experience" data-value="mixed">Mixed experiences</button>
+                            <button class="option-btn" data-category="experience" data-value="skeptical">Skeptical but open</button>
+                            <button class="option-btn" data-category="experience" data-value="burned">Been burned before</button>
                         </div>
                     </div>
                 </div>
@@ -618,32 +721,373 @@
                 
                 <div class="metrics-grid">
                     <div class="metric-card">
-                        <span class="metric-number" id="totalScore">0</span>
-                        <div class="metric-label">Total Score</div>
+                        <span class="metric-number" id="qualifyingFactors">0</span>
+                        <div class="metric-label">Answered</div>
                     </div>
                     <div class="metric-card">
-                        <span class="metric-number" id="completeness">0%</span>
-                        <div class="metric-label">Complete</div>
+                        <span class="metric-number" id="strongIndicators">0</span>
+                        <div class="metric-label">Strong Indicators</div>
                     </div>
                     <div class="metric-card">
-                        <span class="metric-number" id="maxPossible">50</span>
-                        <div class="metric-label">Max Score</div>
+                        <span class="metric-number" id="redFlags">0</span>
+                        <div class="metric-label">Red Flags</div>
                     </div>
                     <div class="metric-card">
-                        <span class="metric-number" id="salesCycle">TBD</span>
-                        <div class="metric-label">Sales Cycle</div>
+                        <span class="metric-number" id="discoveryNeeded">All</span>
+                        <div class="metric-label">Discovery Needed</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Educational tooltip display -->
+    <div class="tooltip-display" id="tooltipDisplay">
+        <div class="tooltip-title" id="tooltipTitle">Hover over any option to learn more</div>
+        <div class="tooltip-description" id="tooltipDescription">Educational guidance will appear here to help you evaluate leads like an experienced salesperson.</div>
+        <div class="tooltip-evaluation" id="tooltipEvaluation">Look for specific signals and behaviors that indicate genuine interest and buying capability.</div>
+    </div>
+
     <script>
         let assessmentData = {};
         const totalCriteria = 10;
         
+        // Educational content for each option
+        const educationalContent = {
+            // How they found you - UPDATED with new options
+            'source-referral': {
+                title: 'Client Referral - GOLD STANDARD',
+                description: 'They came from your existing client network. This is the highest quality lead source.',
+                evaluation: 'Look for: Specific client name mentioned, warm introduction, "John said I should talk to you." This pre-qualifies trust and need.'
+            },
+            'source-partner': {
+                title: 'Partner Recommendation - STRONG',
+                description: 'A business partner or strategic alliance referred them to you.',
+                evaluation: 'Ask: Which partner? How do they know your work? This often indicates they understand your value proposition.'
+            },
+            'source-networking': {
+                title: 'Networking - PERSONAL CONNECTION',
+                description: 'You met through professional networking events or industry connections.',
+                evaluation: 'Face-to-face connection made. Ask about the event context and what resonated about your conversation.'
+            },
+            'source-speaking': {
+                title: 'Speaking/Workshop - QUALIFIED INTEREST',
+                description: 'They heard you speak or attended your workshop and reached out.',
+                evaluation: 'They\'ve seen you demonstrate expertise. Ask what resonated. Usually indicates solution awareness.'
+            },
+            'source-content': {
+                title: 'Content/LinkedIn - WARMER THAN COLD',
+                description: 'Found you through your content, LinkedIn posts, or thought leadership.',
+                evaluation: 'They chose to reach out after consuming your content. Ask what content prompted them to connect.'
+            },
+            'source-marketing': {
+                title: 'Marketing/Advertising - RESPONSE TO OUTREACH',
+                description: 'They responded to your marketing campaigns or advertising efforts.',
+                evaluation: 'Shows interest but could be tire-kicker. Qualify quickly - ask about their specific situation and timeline.'
+            },
+            'source-paid': {
+                title: 'Paid Promotion - LOWEST INTENT SIGNAL',
+                description: 'Found you through paid ads, sponsored content, or promotional campaigns.',
+                evaluation: 'Lowest intent signal. Focus on qualifying real need quickly. May be comparison shopping.'
+            },
+            'source-cold': {
+                title: 'Cold Search - NEEDS QUALIFICATION',
+                description: 'They found you through Google, directory, or cold outreach.',
+                evaluation: 'Highest hurdle. Need to establish credibility quickly and understand their search terms/motivations.'
+            },
+            
+            // Existing relationship
+            'relationship-close': {
+                title: 'Close Connection - HUGE ADVANTAGE',
+                description: 'You have an established, close professional relationship.',
+                evaluation: 'Trust is already built. Focus on understanding their specific challenge rather than selling your credibility.'
+            },
+            'relationship-previous': {
+                title: 'Previous Interaction - KNOWN QUANTITY',
+                description: 'You\'ve worked together before or had significant professional contact.',
+                evaluation: 'They know your work quality. Ask about their current situation and how it relates to previous interactions.'
+            },
+            'relationship-mutual': {
+                title: 'Mutual Connections - SOCIAL PROOF',
+                description: 'You have mutual professional connections or move in same circles.',
+                evaluation: 'Leverage mutual connections for warm introductions or social proof. Ask about shared contacts.'
+            },
+            'relationship-aware': {
+                title: 'Aware of Work - RECOGNITION',
+                description: 'They know of your reputation or have seen your work from a distance.',
+                evaluation: 'They have some familiarity. Build on this recognition and ask what they know about your approach.'
+            },
+            'relationship-none': {
+                title: 'No Prior Connection - COLD START',
+                description: 'This is your first interaction with no previous relationship.',
+                evaluation: 'Need to establish credibility from scratch. Focus on their problems, not your solutions initially.'
+            },
+            
+            // Problem urgency
+            'urgency-crisis': {
+                title: 'Crisis Mode - HIGHEST URGENCY',
+                description: 'They have an immediate crisis that needs urgent resolution.',
+                evaluation: 'Look for specific pain points, deadlines, consequences of inaction. Crisis buyers often have budget flexibility.'
+            },
+            'urgency-urgent': {
+                title: 'Urgent Timeline - NEAR-TERM PRESSURE',
+                description: 'They have pressing deadlines or time-sensitive needs.',
+                evaluation: 'Ask about specific timelines, what\'s driving urgency, consequences of delay. Usually budget-allocated.'
+            },
+            'urgency-planned': {
+                title: 'Planned Initiative - STRUCTURED APPROACH',
+                description: 'This is part of a planned business initiative or project.',
+                evaluation: 'They\'re organized and thoughtful. Ask about project scope, stakeholders, decision process.'
+            },
+            'urgency-future': {
+                title: 'Future Consideration - EARLY STAGE',
+                description: 'They\'re thinking ahead but no immediate pressure.',
+                evaluation: 'Focus on relationship building and education. Timeline likely 6+ months. Stay in touch consistently.'
+            },
+            'urgency-exploring': {
+                title: 'Just Exploring - INFORMATION GATHERING',
+                description: 'They\'re in early research mode with no specific timeline.',
+                evaluation: 'Be helpful but don\'t invest heavily. Provide value through education, ask about their exploration process.'
+            },
+            
+            // Communication style  
+            'communication-strategic': {
+                title: 'Strategic Dialogue - EXECUTIVE LEVEL',
+                description: 'They engage in high-level strategic conversations.',
+                evaluation: 'They think strategically, ask sophisticated questions, discuss business impact. Usually senior decision makers.'
+            },
+            'communication-thoughtful': {
+                title: 'Thoughtful Questions - ENGAGED PROSPECT',
+                description: 'They ask good questions and engage meaningfully in conversation.',
+                evaluation: 'They\'re taking this seriously. Good questions indicate genuine interest and analytical thinking.'
+            },
+            'communication-good': {
+                title: 'Good Back-and-Forth - NORMAL ENGAGEMENT',
+                description: 'Standard professional conversation with decent engagement.',
+                evaluation: 'Baseline professional interaction. Neither particularly engaged nor disengaged.'
+            },
+            'communication-basic': {
+                title: 'Basic Responses - LIMITED ENGAGEMENT',
+                description: 'Short responses, minimal questions, basic level of engagement.',
+                evaluation: 'May be early in their process, distracted, or not the right person. Try to understand their situation.'
+            },
+            'communication-oneway': {
+                title: 'One-Way Requests - RED FLAG',
+                description: 'They just ask for information without meaningful dialogue.',
+                evaluation: 'Often tire-kickers or people gathering competitive intelligence. Require reciprocal engagement.'
+            },
+            
+            // Pain vs Vision buyer
+            'motivation-vision': {
+                title: 'Vision-Driven Growth - BEST BUYER TYPE',
+                description: 'They\'re motivated by growth opportunities and strategic vision.',
+                evaluation: 'Vision buyers invest in future success, less price-sensitive, think strategically. Premium opportunities.'
+            },
+            'motivation-opportunity': {
+                title: 'Strategic Opportunity - GROWTH-MINDED',
+                description: 'They see strategic opportunity and want to capitalize on it.',
+                evaluation: 'They\'re proactive and investment-minded. Ask about their strategic goals and desired outcomes.'
+            },
+            'motivation-mixed': {
+                title: 'Mixed Pain/Vision - REALISTIC BUYER',
+                description: 'Combination of problems to solve and opportunities to capture.',
+                evaluation: 'Most buyers fall here. Understand both the pain points and growth aspirations.'
+            },
+            'motivation-reactive': {
+                title: 'Problem-Reactive - NEEDS-DRIVEN',
+                description: 'Primarily motivated by problems they need to solve.',
+                evaluation: 'Focus on problem severity and consequences. May be more price-sensitive than vision buyers.'
+            },
+            'motivation-crisis_reactive': {
+                title: 'Crisis-Reactive - DESPERATION',
+                description: 'Reacting to crisis or emergency situations.',
+                evaluation: 'Urgent but may want quick fixes. Ensure they understand strategic solutions, not just band-aids.'
+            },
+            
+            // Decision authority
+            'authority-final': {
+                title: 'Final Decision Maker - IDEAL CONTACT',
+                description: 'They can say yes and write checks without approval.',
+                evaluation: 'Gold standard contact. Focus on value proposition and their desired outcomes rather than building consensus.'
+            },
+            'authority-influence': {
+                title: 'Strong Influence - CLOSE TO POWER',
+                description: 'They have significant input into the decision-making process.',
+                evaluation: 'Often trusted advisors to the decision maker. Ask about the decision process and other stakeholders.'
+            },
+            'authority-committee': {
+                title: 'Part of Committee - GROUP DECISION',
+                description: 'They\'re one voice in a committee or group decision process.',
+                evaluation: 'Understand committee dynamics, other stakeholders, decision criteria. Ask about the process.'
+            },
+            'authority-recommend': {
+                title: 'Makes Recommendation - LIMITED POWER',
+                description: 'They can recommend but someone else decides.',
+                evaluation: 'Good champion but not decision maker. Ask to meet the person who makes final decisions.'
+            },
+            'authority-none': {
+                title: 'No Authority - INFORMATION GATHERER',
+                description: 'They\'re gathering information but can\'t make purchasing decisions.',
+                evaluation: 'Often wasted effort unless they can connect you to decision makers. Ask for introductions up.'
+            },
+            
+            // Type of need
+            'need_type-strategic': {
+                title: 'Strategic Consulting - HIGHEST VALUE',
+                description: 'They need strategic guidance and high-level consulting.',
+                evaluation: 'Premium engagement opportunity. They value expertise and strategic thinking over execution.'
+            },
+            'need_type-problem': {
+                title: 'Problem Solving - SUBSTANTIVE WORK',
+                description: 'They have specific problems that need expert resolution.',
+                evaluation: 'Good opportunity if problems are complex. Ask about problem scope, implications, previous attempts.'
+            },
+            'need_type-process': {
+                title: 'Process Improvement - OPERATIONAL FOCUS',
+                description: 'They want to improve existing processes or systems.',
+                evaluation: 'Usually mid-tier engagement. Ask about current process pain points and improvement goals.'
+            },
+            'need_type-training': {
+                title: 'Training/Development - SKILL BUILDING',
+                description: 'They need training or capability development.',
+                evaluation: 'Often budget-constrained. Ask about learning objectives and success metrics.'
+            },
+            'need_type-execution': {
+                title: 'Basic Execution - COMMODITY WORK',
+                description: 'They need basic implementation or execution support.',
+                evaluation: 'Usually low-value, price-sensitive work. Consider if it fits your positioning and capabilities.'
+            },
+            
+            // Budget discussions
+            'budget-allocated': {
+                title: 'Clear Budget Allocated - READY TO BUY',
+                description: 'They have budget specifically allocated for this type of work.',
+                evaluation: 'Best scenario - money is already set aside. Ask about budget range and approval process.'
+            },
+            'budget-investment': {
+                title: 'Investment Mindset - VALUE-FOCUSED',
+                description: 'They view this as an investment and are focused on ROI.',
+                evaluation: 'They understand value over cost. Discuss expected outcomes and return on investment.'
+            },
+            'budget-approval': {
+                title: 'Needs Approval - PROCESS REQUIRED',
+                description: 'Budget exists but requires approval process.',
+                evaluation: 'Ask about approval process, timeline, decision makers. Help them build business case.'
+            },
+            'budget-conscious': {
+                title: 'Price Conscious - COST-SENSITIVE',
+                description: 'They\'re concerned about price and need to justify costs.',
+                evaluation: 'Focus on value and ROI. May need help building business case for investment.'
+            },
+            'budget-focused': {
+                title: 'Cost-Focused - PRICE SHOPPING',
+                description: 'Primarily focused on getting lowest cost solution.',
+                evaluation: 'Often not good fit for premium services. May be comparing you to lower-cost alternatives.'
+            },
+            
+            // Timeline expectations
+            'timeline-ready': {
+                title: 'Ready to Start Soon - IMMEDIATE',
+                description: 'They want to begin work within days or weeks.',
+                evaluation: 'Strong buying signal. Ask about start date preferences and any constraints on timing.'
+            },
+            'timeline-nearterm': {
+                title: 'Next 30-60 Days - NEAR TERM',
+                description: 'They\'re planning to start within the next 1-2 months.',
+                evaluation: 'Active timeline indicates serious intent. Ask about what needs to happen before starting.'
+            },
+            'timeline-quarter': {
+                title: 'Next Quarter - PLANNED TIMELINE',
+                description: 'They\'re thinking about next quarter for project start.',
+                evaluation: 'Gives time for proper planning and approvals. Ask about quarterly planning process.'
+            },
+            'timeline-year': {
+                title: 'Sometime This Year - VAGUE TIMELINE',
+                description: 'General sense of wanting to do this within the year.',
+                evaluation: 'Less urgent but still active interest. Stay in regular contact and provide value.'
+            },
+            'timeline-exploring': {
+                title: 'Just Exploring - NO TIMELINE',
+                description: 'No specific timeline, just gathering information.',
+                evaluation: 'Early stage exploration. Focus on education and relationship building over urgency.'
+            },
+            
+            // Previous consultant experience
+            'experience-values': {
+                title: 'Values Strategic Expertise - IDEAL CLIENT',
+                description: 'They understand and value high-level strategic consulting.',
+                evaluation: 'Best client type - they know good consulting and will pay for expertise and strategic thinking.'
+            },
+            'experience-positive': {
+                title: 'Positive Past Experience - GOOD REFERENCE',
+                description: 'They\'ve had good experiences with consultants previously.',
+                evaluation: 'They understand the value consultants bring. Ask about what worked well in past engagements.'
+            },
+            'experience-mixed': {
+                title: 'Mixed Experiences - VARIED RESULTS',
+                description: 'They\'ve had both good and bad experiences with consultants.',
+                evaluation: 'Ask about what worked and what didn\'t. Use this to position yourself differently.'
+            },
+            'experience-skeptical': {
+                title: 'Skeptical but Open - NEEDS CONVINCING',
+                description: 'They have some reservations but are willing to consider consultants.',
+                evaluation: 'Address their concerns upfront. Ask about their reservations and how you can address them.'
+            },
+            'experience-burned': {
+                title: 'Been Burned Before - TRUST ISSUES',
+                description: 'They\'ve had bad experiences with consultants previously.',
+                evaluation: 'High hurdle to overcome. Ask about what went wrong and how you operate differently.'
+            }
+        };
+        
+        function showTooltip(element) {
+            const category = element.dataset.category;
+            const value = element.dataset.value;
+            const key = `${category}-${value}`;
+            const content = educationalContent[key];
+            
+            if (content) {
+                const tooltip = document.getElementById('tooltipDisplay');
+                
+                // Update tooltip content
+                document.getElementById('tooltipTitle').textContent = content.title;
+                document.getElementById('tooltipDescription').textContent = content.description;
+                document.getElementById('tooltipEvaluation').textContent = content.evaluation;
+                
+                // Position tooltip below the hovered element
+                const rect = element.getBoundingClientRect();
+                const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                let left = rect.left + scrollLeft;
+                let top = rect.bottom + scrollTop + 8; // 8px gap below element
+                
+                // Adjust if tooltip would go off-screen horizontally
+                const tooltipWidth = 350; // max-width from CSS
+                if (left + tooltipWidth > window.innerWidth) {
+                    left = window.innerWidth - tooltipWidth - 20;
+                }
+                if (left < 20) {
+                    left = 20;
+                }
+                
+                // Adjust if tooltip would go off-screen vertically (show above instead)
+                if (top + 120 > window.innerHeight + scrollTop) { // approximate tooltip height
+                    top = rect.top + scrollTop - 120 - 8; // Show above instead
+                }
+                
+                tooltip.style.left = left + 'px';
+                tooltip.style.top = top + 'px';
+                tooltip.classList.add('visible');
+            }
+        }
+        
+        function hideTooltip() {
+            document.getElementById('tooltipDisplay').classList.remove('visible');
+        }
+        
         function updateAssessment(category, value) {
-            assessmentData[category] = parseInt(value);
+            assessmentData[category] = value; // No more parseInt - store descriptive values
             updateResults();
         }
         
@@ -726,150 +1170,306 @@
         };
         
         function calculateTemperature(data) {
-            // Auto-qualification rules - these combinations immediately set temperature
-            const autoQualifiers = {
-                hot: [
-                    // Decision maker + high urgency + referral = instant hot
-                    () => data.authority >= 4 && data.urgency >= 4 && data.source >= 4,
-                    // Crisis mode + budget allocated + existing relationship = instant hot  
-                    () => data.urgency === 5 && data.budget >= 4 && data.relationship >= 3,
-                    // Strategic need + investment mindset + ready timeline = instant hot
-                    () => data.need_type >= 4 && data.budget >= 4 && data.timeline >= 4
-                ],
-                warm: [
-                    // Decision authority + clear need + some relationship = warm
-                    () => data.authority >= 4 && data.need_type >= 3 && data.relationship >= 3,
-                    // Good relationship + planned initiative + strategic dialogue = warm
-                    () => data.relationship >= 4 && data.urgency >= 3 && data.communication >= 4
-                ],
-                cold: [
-                    // No authority + no relationship + just exploring = cold
-                    () => data.authority <= 2 && data.relationship <= 2 && data.urgency <= 2,
-                    // Been burned + cost-focused + no timeline = cold
-                    () => data.experience <= 2 && data.budget <= 2 && data.timeline <= 2
-                ]
-            };
+            // Phase 2 questions that indicate buying mechanics
+            const hasBuyingMechanics = (data.authority === 'final' || data.authority === 'influence') && 
+                                     (data.budget === 'allocated' || data.budget === 'investment');
             
-            // Check auto-qualifiers first
-            for (const condition of autoQualifiers.hot) {
-                if (condition()) return 'hot';
-            }
-            for (const condition of autoQualifiers.cold) {
-                if (condition()) return 'cold';
-            }
-            for (const condition of autoQualifiers.warm) {
-                if (condition()) return 'warm';
+            // INSTANT DISQUALIFIERS = COLD
+            if (data.communication === 'oneway' || 
+                data.experience === 'burned' || 
+                data.motivation === 'crisis_reactive' ||
+                (data.authority === 'none' && data.relationship === 'none' && data.urgency === 'exploring') ||
+                (data.budget === 'focused' && data.need_type === 'execution' && data.timeline === 'exploring')) {
+                return 'cold';
             }
             
-            // If no auto-qualifiers, use weighted scoring
-            const weights = {
-                // Relationship factors (40% of total weight)
-                source: 3,      // How they found you is crucial
-                relationship: 4, // Existing relationship is huge
-                authority: 5,   // Decision authority is critical
-                
-                // Need factors (35% of total weight) 
-                urgency: 4,     // Urgency drives sales cycles
-                need_type: 3,   // Strategic vs tactical matters
-                motivation: 2,  // Pain vs vision buying
-                
-                // Qualification factors (25% of total weight)
-                budget: 3,      // Budget discussions are key
-                experience: 2,  // Past experience shapes approach
-                communication: 2, // Engagement quality
-                timeline: 2     // Timeline expectations
-            };
+            // HOT QUALIFIERS - require strong Phase 1 + confirmed buying mechanics
+            if (hasBuyingMechanics) {
+                if (data.source === 'referral' && data.relationship === 'close') return 'hot';
+                if (data.urgency === 'crisis' && data.authority === 'final') return 'hot';
+                if (data.need_type === 'strategic' && data.budget === 'allocated' && data.timeline === 'ready') return 'hot';
+            }
             
-            let weightedScore = 0;
-            let maxWeightedScore = 0;
+            // WARM QUALIFIERS - strong relationship/need indicators
+            if (data.source === 'referral') return 'warm';
+            if (data.relationship === 'close' || data.relationship === 'previous') return 'warm';
+            if (data.urgency === 'crisis' || data.urgency === 'urgent') return 'warm';
+            if (data.communication === 'strategic') return 'warm';
+            if (data.motivation === 'vision' || data.motivation === 'opportunity') return 'warm';
+            if (data.authority === 'final' || data.authority === 'influence') return 'warm';
+            if (data.budget === 'allocated' || data.budget === 'investment') return 'warm';
+            if (data.timeline === 'ready' || data.timeline === 'nearterm') return 'warm';
+            if (data.experience === 'values') return 'warm';
+            if (data.need_type === 'strategic') return 'warm';
             
-            Object.keys(weights).forEach(key => {
-                if (data[key]) {
-                    weightedScore += data[key] * weights[key];
-                }
-                maxWeightedScore += 5 * weights[key];
-            });
+            // LUKEWARM QUALIFIERS - decent indicators but need development
+            if (data.source === 'partner' || data.source === 'networking' || data.source === 'speaking') return 'lukewarm';
+            if (data.relationship === 'mutual' || data.relationship === 'aware') return 'lukewarm';
+            if (data.urgency === 'planned') return 'lukewarm';
+            if (data.communication === 'thoughtful' || data.communication === 'good') return 'lukewarm';
+            if (data.motivation === 'mixed' || data.motivation === 'reactive') return 'lukewarm';
+            if (data.authority === 'committee') return 'lukewarm';
+            if (data.budget === 'approval') return 'lukewarm';
+            if (data.timeline === 'quarter') return 'lukewarm';
+            if (data.experience === 'positive' || data.experience === 'mixed') return 'lukewarm';
+            if (data.need_type === 'problem' || data.need_type === 'process') return 'lukewarm';
             
-            const percentage = (weightedScore / maxWeightedScore) * 100;
+            // COOL QUALIFIERS - limited connection/interest
+            if (data.source === 'content' || data.source === 'marketing' || data.source === 'paid') return 'cool';
+            if (data.relationship === 'none') return 'cool';
+            if (data.urgency === 'future') return 'cool';
+            if (data.communication === 'basic') return 'cool';
+            if (data.authority === 'recommend') return 'cool';
+            if (data.budget === 'conscious') return 'cool';
+            if (data.timeline === 'year') return 'cool';
+            if (data.experience === 'skeptical') return 'cool';
+            if (data.need_type === 'training') return 'cool';
             
-            // Realistic thresholds based on weighted scoring
-            if (percentage >= 75) return 'hot';
-            if (percentage >= 60) return 'warm'; 
-            if (percentage >= 40) return 'lukewarm';
-            if (percentage >= 25) return 'cool';
-            return 'cold';
+            // Default for incomplete data or edge cases
+            return 'cool';
         }
         
         function updateResults() {
             const completedCriteria = Object.keys(assessmentData).length;
             const completeness = Math.round((completedCriteria / totalCriteria) * 100);
             
-            // Update metrics
-            document.getElementById('completeness').textContent = completeness + '%';
+            // Update metrics with null checks
+            const completenessEl = document.getElementById('completeness');
+            if (completenessEl) completenessEl.textContent = completeness + '%';
             
-            // Only show temperature if 100% complete
-            if (completeness < 100) {
-                document.getElementById('temperatureLabel').textContent = 'IN PROGRESS';
-                document.getElementById('temperatureLabel').style.color = '#fefdfb';
-                document.getElementById('temperatureScore').textContent = `${completedCriteria}/${totalCriteria} criteria completed`;
-                document.getElementById('recommendationText').textContent = 'Complete all assessment criteria to see lead temperature and recommendations.';
-                document.getElementById('salesCycle').textContent = 'TBD';
-                document.getElementById('personaMatch').style.display = 'none';
-                
-                // Reset to default background
-                const resultsSection = document.querySelector('.results-section');
-                resultsSection.style.background = 'linear-gradient(135deg, #1B7F92 0%, #b36278 100%)';
-                
-                // Show basic actions
-                const actionsList = document.getElementById('actionsList');
-                actionsList.innerHTML = `
-                    <li>Complete remaining ${totalCriteria - completedCriteria} criteria</li>
-                    <li>All questions must be answered for accurate assessment</li>
-                    <li>Temperature will be calculated automatically</li>
-                `;
-                
-                document.getElementById('totalScore').textContent = 'N/A';
-                return;
-            }
-            
-            // Calculate temperature using realistic logic
+            // Calculate temperature using decision tree logic (real-time updates)
             const temperature = calculateTemperature(assessmentData);
             const rec = recommendations[temperature];
             
-            // Calculate display score for reference
-            const totalScore = Object.values(assessmentData).reduce((sum, val) => sum + val, 0);
+            // Analyze patterns instead of scoring
+            const analysis = analyzePatterns(assessmentData);
             
-            // Update display
+            // Update display with null checks
             const tempLabel = document.getElementById('temperatureLabel');
             const tempScore = document.getElementById('temperatureScore');
             const resultsSection = document.querySelector('.results-section');
+            const recommendationText = document.getElementById('recommendationText');
+            const salesCycle = document.getElementById('salesCycle');
+            const personaMatch = document.getElementById('personaMatch');
             
-            tempLabel.textContent = rec.label;
-            tempLabel.style.color = rec.color;
-            tempScore.textContent = `Completed Assessment (${totalScore}/50 raw score)`;
+            if (completedCriteria === 0) {
+                if (tempLabel) {
+                    tempLabel.textContent = 'START ASSESSMENT';
+                    tempLabel.style.color = '#fefdfb';
+                }
+                if (tempScore) tempScore.textContent = 'Select options to see real-time lead qualification';
+                if (resultsSection) {
+                    resultsSection.style.background = 'linear-gradient(135deg, #1B7F92 0%, #b36278 100%)';
+                    resultsSection.classList.remove('lukewarm-theme');
+                }
+                if (recommendationText) recommendationText.textContent = 'Begin assessment to see lead temperature and strategy recommendations.';
+                if (salesCycle) salesCycle.textContent = 'TBD';
+                if (personaMatch) personaMatch.style.display = 'none';
+                
+                // Show starting metrics with null checks
+                const qualifyingFactors = document.getElementById('qualifyingFactors');
+                const strongIndicators = document.getElementById('strongIndicators');
+                const redFlags = document.getElementById('redFlags');
+                const discoveryNeeded = document.getElementById('discoveryNeeded');
+                
+                if (qualifyingFactors) qualifyingFactors.textContent = '0';
+                if (strongIndicators) strongIndicators.textContent = '0';
+                if (redFlags) redFlags.textContent = '0';
+                if (discoveryNeeded) discoveryNeeded.textContent = 'All';
+                
+                const actionsList = document.getElementById('actionsList');
+                if (actionsList) {
+                    actionsList.innerHTML = `
+                        <li>Start with Phase 1 basic qualifying questions</li>
+                        <li>Temperature updates as you select options</li>
+                        <li>See immediate qualification results</li>
+                    `;
+                }
+                return;
+            }
+            
+            if (tempLabel) {
+                tempLabel.textContent = rec.label;
+                tempLabel.style.color = rec.color;
+            }
+            if (tempScore) tempScore.textContent = analysis.qualificationCeiling || analysis.primaryTrigger;
             
             // Update background color of results section
-            resultsSection.style.background = rec.bgColor;
+            if (resultsSection) {
+                resultsSection.style.background = rec.bgColor;
+                
+                // Add special styling for lukewarm
+                if (temperature === 'lukewarm') {
+                    resultsSection.classList.add('lukewarm-theme');
+                } else {
+                    resultsSection.classList.remove('lukewarm-theme');
+                }
+            }
             
-            // Update recommendation
-            document.getElementById('recommendationText').textContent = rec.text;
-            document.getElementById('salesCycle').textContent = rec.cycle;
-            document.getElementById('totalScore').textContent = totalScore;
+            // Update recommendation with pattern analysis
+            if (recommendationText) recommendationText.textContent = rec.text;
+            if (salesCycle) salesCycle.textContent = rec.cycle;
+            
+            // Update pattern-based metrics with null checks
+            const qualifyingFactors = document.getElementById('qualifyingFactors');
+            const strongIndicators = document.getElementById('strongIndicators');
+            const redFlags = document.getElementById('redFlags');
+            const discoveryNeeded = document.getElementById('discoveryNeeded');
+            
+            if (qualifyingFactors) qualifyingFactors.textContent = `${completedCriteria}/10`;
+            if (strongIndicators) strongIndicators.textContent = analysis.strongIndicators.length;
+            if (redFlags) redFlags.textContent = analysis.redFlags.length;
+            if (discoveryNeeded) discoveryNeeded.textContent = analysis.discoveryGaps.length > 0 ? analysis.discoveryGaps.length : 'None';
             
             // Update actions
             const actionsList = document.getElementById('actionsList');
-            actionsList.innerHTML = '';
-            rec.actions.forEach(action => {
-                const li = document.createElement('li');
-                li.textContent = action;
-                actionsList.appendChild(li);
+            if (actionsList) {
+                actionsList.innerHTML = '';
+                rec.actions.forEach(action => {
+                    const li = document.createElement('li');
+                    li.textContent = action;
+                    actionsList.appendChild(li);
+                });
+            }
+            
+            // Show pattern analysis details
+            const personaText = document.getElementById('personaText');
+            if (completedCriteria >= 3) {
+                if (personaMatch) personaMatch.style.display = 'block';
+                if (personaText) {
+                    let analysisText = '';
+                    if (analysis.strongIndicators.length > 0) {
+                        analysisText += `Strong: ${analysis.strongIndicators.join(', ')}. `;
+                    }
+                    if (analysis.redFlags.length > 0) {
+                        analysisText += `Red flags: ${analysis.redFlags.join(', ')}. `;
+                    }
+                    if (analysis.discoveryGaps.length > 0) {
+                        analysisText += `Still need: ${analysis.discoveryGaps.join(', ')}.`;
+                    }
+                    personaText.textContent = analysisText || rec.persona;
+                }
+            } else {
+                if (personaMatch) personaMatch.style.display = 'none';
+            }
+        }
+        
+        function analyzePatterns(data) {
+            const strongIndicators = [];
+            const redFlags = [];
+            const discoveryGaps = [];
+            let primaryTrigger = 'Analyzing patterns...';
+            let qualificationCeiling = '';
+            
+            const phase1Questions = ['source', 'relationship', 'urgency', 'communication', 'motivation'];
+            const phase2Questions = ['authority', 'need_type', 'budget', 'timeline', 'experience'];
+            
+            const phase1Answered = phase1Questions.filter(q => data[q]).length;
+            const phase2Answered = phase2Questions.filter(q => data[q]).length;
+            const phase1Strong = phase1Questions.filter(q => data[q] >= 4).length;
+            
+            // Identify strong positive indicators
+            if (data.source >= 4) strongIndicators.push('Client referral');
+            if (data.relationship >= 4) strongIndicators.push('Close relationship');
+            if (data.urgency >= 4) strongIndicators.push('High urgency');
+            if (data.authority >= 4) strongIndicators.push('Decision authority');
+            if (data.budget >= 4) strongIndicators.push('Budget available');
+            if (data.need_type >= 4) strongIndicators.push('Strategic need');
+            if (data.communication >= 4) strongIndicators.push('Strategic dialogue');
+            if (data.motivation >= 4) strongIndicators.push('Vision-driven');
+            if (data.timeline >= 4) strongIndicators.push('Ready timeline');
+            if (data.experience >= 4) strongIndicators.push('Values expertise');
+            
+            // Identify red flags
+            if (data.source === 1) redFlags.push('Cold outreach');
+            if (data.relationship === 1) redFlags.push('No connection');
+            if (data.authority <= 2) redFlags.push('No authority');
+            if (data.budget <= 2) redFlags.push('Cost-focused');
+            if (data.urgency <= 2) redFlags.push('No urgency');
+            if (data.experience <= 2) redFlags.push('Bad consultant experience');
+            if (data.need_type <= 2) redFlags.push('Tactical only');
+            if (data.timeline <= 2) redFlags.push('No timeline');
+            if (data.communication <= 2) redFlags.push('Poor engagement');
+            
+            // Identify what still needs discovery
+            phase2Questions.forEach(q => {
+                if (!data[q]) {
+                    switch(q) {
+                        case 'authority': discoveryGaps.push('Decision authority'); break;
+                        case 'need_type': discoveryGaps.push('Type of need'); break;
+                        case 'budget': discoveryGaps.push('Budget discussions'); break;
+                        case 'timeline': discoveryGaps.push('Timeline expectations'); break;
+                        case 'experience': discoveryGaps.push('Past experience'); break;
+                    }
+                }
             });
             
-            // Update persona match
-            const personaMatch = document.getElementById('personaMatch');
-            const personaText = document.getElementById('personaText');
-            personaMatch.style.display = 'block';
-            personaText.textContent = rec.persona;
+            // Determine qualification ceiling and educational messaging
+            if (phase2Answered === 0 && phase1Strong >= 3) {
+                qualificationCeiling = `WARM ceiling - Need authority + budget for HOT`;
+                primaryTrigger = `${phase1Strong} strong Phase 1 indicators`;
+            } else if (phase2Answered > 0 && strongIndicators.length >= 3) {
+                if (data.authority >= 4 && data.budget >= 4) {
+                    qualificationCeiling = 'HOT potential confirmed';
+                    primaryTrigger = 'Authority + Budget + Strong indicators';
+                } else {
+                    const missing = [];
+                    if (!data.authority || data.authority < 4) missing.push('authority');
+                    if (!data.budget || data.budget < 4) missing.push('budget');
+                    qualificationCeiling = `Need ${missing.join(' + ')} for HOT`;
+                    primaryTrigger = `Strong indicators, missing ${missing.join(', ')}`;
+                }
+            } else if (redFlags.length >= 2) {
+                primaryTrigger = `${redFlags.length} red flags detected`;
+            } else if (strongIndicators.length >= 2) {
+                primaryTrigger = `${strongIndicators.length} positive indicators`;
+            } else if (discoveryGaps.length >= 4) {
+                primaryTrigger = 'Needs discovery';
+            } else {
+                primaryTrigger = 'Mixed signals';
+            }
+            
+            return {
+                primaryTrigger,
+                qualificationCeiling,
+                strongIndicators,
+                redFlags,
+                discoveryGaps,
+                phase1Answered,
+                phase2Answered,
+                phase1Strong
+            };
+        }
+        
+        function getTriggerReason(data, temperature) {
+            // Return a brief explanation of why this temperature was assigned
+            switch(temperature) {
+                case 'hot':
+                    if (data.source >= 4 && data.authority >= 4) return 'Referral + Decision Authority';
+                    if (data.urgency === 5 && data.budget >= 4) return 'Crisis + Budget Available';
+                    if (data.need_type >= 4 && data.budget >= 4 && data.timeline >= 4) return 'Strategic Need + Ready to Buy';
+                    return 'Multiple Strong Qualifiers';
+                    
+                case 'warm':
+                    if (data.relationship >= 4 && data.need_type >= 4) return 'Strong Relationship + Clear Need';
+                    if (data.source >= 3 && data.urgency >= 3) return 'Good Source + Planned Initiative';
+                    return 'Several Positive Indicators';
+                    
+                case 'lukewarm':
+                    return 'Mixed Signals - Needs Discovery';
+                    
+                case 'cool':
+                    if (data.need_type >= 3 && data.relationship <= 3) return 'Potential Fit - Limited Relationship';
+                    return 'Some Potential - Early Stage';
+                    
+                case 'cold':
+                    if (data.authority <= 2 && data.relationship <= 2) return 'No Authority + No Relationship';
+                    if (data.experience <= 2 && data.budget <= 2) return 'Bad Experience + Cost-Focused';
+                    return 'Multiple Disqualifiers';
+                    
+                default:
+                    return 'Pattern Analysis Complete';
+            }
         }
         
         function resetAssessment() {
@@ -880,25 +1480,47 @@
             
             const tempLabel = document.getElementById('temperatureLabel');
             const resultsSection = document.querySelector('.results-section');
+            const tempScore = document.getElementById('temperatureScore');
+            const recommendationText = document.getElementById('recommendationText');
+            const completenessEl = document.getElementById('completeness');
+            const salesCycle = document.getElementById('salesCycle');
+            const personaMatch = document.getElementById('personaMatch');
             
-            tempLabel.textContent = 'UNASSESSED';
-            tempLabel.style.color = '#fefdfb';
-            document.getElementById('temperatureScore').textContent = 'Complete assessment to see lead temperature';
-            document.getElementById('recommendationText').textContent = 'Select options from the left to generate your lead temperature and strategy recommendations.';
-            document.getElementById('totalScore').textContent = '0';
-            document.getElementById('completeness').textContent = '0%';
-            document.getElementById('salesCycle').textContent = 'TBD';
-            document.getElementById('personaMatch').style.display = 'none';
+            if (tempLabel) {
+                tempLabel.textContent = 'START ASSESSMENT';
+                tempLabel.style.color = '#fefdfb';
+            }
+            if (tempScore) tempScore.textContent = 'Select options to see real-time lead qualification';
+            if (recommendationText) recommendationText.textContent = 'Begin assessment to see lead temperature and strategy recommendations.';
+            if (completenessEl) completenessEl.textContent = '0%';
+            if (salesCycle) salesCycle.textContent = 'TBD';
+            if (personaMatch) personaMatch.style.display = 'none';
+            
+            // Reset pattern metrics with null checks
+            const qualifyingFactors = document.getElementById('qualifyingFactors');
+            const strongIndicators = document.getElementById('strongIndicators');
+            const redFlags = document.getElementById('redFlags');
+            const discoveryNeeded = document.getElementById('discoveryNeeded');
+            
+            if (qualifyingFactors) qualifyingFactors.textContent = '0';
+            if (strongIndicators) strongIndicators.textContent = '0';
+            if (redFlags) redFlags.textContent = '0';
+            if (discoveryNeeded) discoveryNeeded.textContent = 'All';
             
             // Reset background to default
-            resultsSection.style.background = 'linear-gradient(135deg, #1B7F92 0%, #b36278 100%)';
+            if (resultsSection) {
+                resultsSection.style.background = 'linear-gradient(135deg, #1B7F92 0%, #b36278 100%)';
+                resultsSection.classList.remove('lukewarm-theme');
+            }
             
             const actionsList = document.getElementById('actionsList');
-            actionsList.innerHTML = `
-                <li>Complete the assessment criteria</li>
-                <li>Review lead temperature rating</li>
-                <li>Follow suggested engagement strategy</li>
-            `;
+            if (actionsList) {
+                actionsList.innerHTML = `
+                    <li>Start with Phase 1 basic qualifying questions</li>
+                    <li>Temperature updates as you select options</li>
+                    <li>See immediate qualification results</li>
+                `;
+            }
         }
         
         // Add click handlers to option buttons
@@ -917,6 +1539,15 @@
                 
                 // Update assessment
                 updateAssessment(category, value);
+            });
+            
+            // Add hover tooltips
+            btn.addEventListener('mouseenter', function() {
+                showTooltip(this);
+            });
+            
+            btn.addEventListener('mouseleave', function() {
+                hideTooltip();
             });
         });
         
