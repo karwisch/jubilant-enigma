@@ -1754,31 +1754,46 @@
         }
 
         .reframe-container {
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .reframe-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem 2.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .reframe-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
         }
 
         .reframe-statement {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             line-height: 1.6;
             color: var(--charcoal);
-            margin-bottom: 1.5rem;
+            margin: 0;
             font-weight: 400;
+            text-align: center;
         }
 
-        .reframe-statement.emphasis {
+        .reframe-card.emphasis .reframe-statement {
             font-weight: 600;
             color: var(--teal);
-            font-size: 1.5rem;
+            font-size: 1.4rem;
         }
 
-        .reframe-statement.final {
-            font-size: 1.3rem;
-            font-weight: 600;
+        .reframe-card.final .reframe-statement {
+            font-size: 1.5rem;
+            font-weight: 700;
             color: var(--mauve);
-            margin-bottom: 0;
         }
 
         /* Mobile styles for reframe */
@@ -1787,16 +1802,24 @@
                 padding: 3rem 1.5rem;
             }
 
+            .reframe-container {
+                gap: 1rem;
+            }
+
+            .reframe-card {
+                padding: 1.5rem 1.75rem;
+            }
+
             .reframe-statement {
+                font-size: 1.1rem;
+            }
+
+            .reframe-card.emphasis .reframe-statement {
                 font-size: 1.2rem;
             }
 
-            .reframe-statement.emphasis {
+            .reframe-card.final .reframe-statement {
                 font-size: 1.3rem;
-            }
-
-            .reframe-statement.final {
-                font-size: 1.15rem;
             }
         }
 
@@ -2397,9 +2420,15 @@
     <!-- Reframe Section -->
     <div class="reframe-section">
         <div class="reframe-container">
-            <p class="reframe-statement">Most people think they need to push harder, figure themselves out, or find the right strategy.</p>
-            <p class="reframe-statement emphasis">What actually works: recognizing the patterns creating friction, experimenting with what works for you, and building skills that compound.</p>
-            <p class="reframe-statement final">That's the work.</p>
+            <div class="reframe-card">
+                <p class="reframe-statement">Most people think they need to push harder, figure themselves out, or find the right strategy.</p>
+            </div>
+            <div class="reframe-card emphasis">
+                <p class="reframe-statement">What actually works: recognizing the patterns creating friction, experimenting with what works for you, and building skills that compound.</p>
+            </div>
+            <div class="reframe-card final">
+                <p class="reframe-statement">That's the work.</p>
+            </div>
         </div>
     </div>
 
