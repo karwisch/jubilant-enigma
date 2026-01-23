@@ -1749,91 +1749,68 @@
 
         /* Reframe Section */
         .reframe-section {
-            background: linear-gradient(135deg, var(--cream), var(--warm-white));
-            padding: 4rem 2rem;
+            background: var(--warm-white);
+            padding: 5rem 2rem;
         }
 
         .reframe-container {
-            max-width: 800px;
+            max-width: 750px;
             margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .reframe-card {
-            background: white;
-            border-radius: 12px;
-            padding: 2rem 2.5rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            display: flex;
-            align-items: flex-start;
-            gap: 1.5rem;
-        }
-
-        .reframe-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-        }
-
-        .reframe-icon {
-            font-size: 2.5rem;
-            flex-shrink: 0;
-            line-height: 1;
+            border-left: 4px solid var(--teal);
+            padding-left: 2.5rem;
         }
 
         .reframe-statement {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.3rem;
-            line-height: 1.6;
+            font-size: 1.4rem;
+            line-height: 1.7;
             color: var(--charcoal);
-            margin: 0;
+            margin: 0 0 2rem 0;
             font-weight: 400;
-            text-align: left;
         }
 
-        .reframe-card.emphasis .reframe-statement {
+        .reframe-statement:last-child {
+            margin-bottom: 0;
+        }
+
+        .reframe-statement.emphasis {
             font-weight: 600;
             color: var(--teal);
-            font-size: 1.4rem;
+            font-size: 1.5rem;
+            margin: 2.5rem 0;
         }
 
-        .reframe-card.final .reframe-statement {
-            font-size: 1.5rem;
+        .reframe-statement.final {
+            font-size: 1.6rem;
             font-weight: 700;
             color: var(--mauve);
+            margin-top: 2.5rem;
         }
 
         /* Mobile styles for reframe */
         @media (max-width: 768px) {
             .reframe-section {
-                padding: 3rem 1.5rem;
+                padding: 3.5rem 1.5rem;
             }
 
             .reframe-container {
-                gap: 1rem;
-            }
-
-            .reframe-card {
-                padding: 1.5rem 1.75rem;
-                gap: 1rem;
-            }
-
-            .reframe-icon {
-                font-size: 2rem;
+                border-left-width: 3px;
+                padding-left: 1.5rem;
             }
 
             .reframe-statement {
-                font-size: 1.1rem;
+                font-size: 1.15rem;
+                margin-bottom: 1.5rem;
             }
 
-            .reframe-card.emphasis .reframe-statement {
-                font-size: 1.2rem;
+            .reframe-statement.emphasis {
+                font-size: 1.25rem;
+                margin: 2rem 0;
             }
 
-            .reframe-card.final .reframe-statement {
-                font-size: 1.3rem;
+            .reframe-statement.final {
+                font-size: 1.35rem;
+                margin-top: 2rem;
             }
         }
 
@@ -2434,18 +2411,9 @@
     <!-- Reframe Section -->
     <div class="reframe-section">
         <div class="reframe-container">
-            <div class="reframe-card">
-                <div class="reframe-icon">❌</div>
-                <p class="reframe-statement">Most people think they need to push harder, figure themselves out, or find the right strategy.</p>
-            </div>
-            <div class="reframe-card emphasis">
-                <div class="reframe-icon">✅</div>
-                <p class="reframe-statement">What actually works: recognizing the patterns creating friction, experimenting with what works for you, and building skills that compound.</p>
-            </div>
-            <div class="reframe-card final">
-                <div class="reframe-icon">💪</div>
-                <p class="reframe-statement">That's the work.</p>
-            </div>
+            <p class="reframe-statement">Most people think they need to push harder, figure themselves out, or find the right strategy.</p>
+            <p class="reframe-statement emphasis">What actually works: recognizing the patterns creating friction, experimenting with what works for you, and building skills that compound.</p>
+            <p class="reframe-statement final">That's the work.</p>
         </div>
     </div>
 
