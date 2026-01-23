@@ -1767,11 +1767,20 @@
             padding: 2rem 2.5rem;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
         }
 
         .reframe-card:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .reframe-icon {
+            font-size: 2.5rem;
+            flex-shrink: 0;
+            line-height: 1;
         }
 
         .reframe-statement {
@@ -1781,7 +1790,7 @@
             color: var(--charcoal);
             margin: 0;
             font-weight: 400;
-            text-align: center;
+            text-align: left;
         }
 
         .reframe-card.emphasis .reframe-statement {
@@ -1808,6 +1817,11 @@
 
             .reframe-card {
                 padding: 1.5rem 1.75rem;
+                gap: 1rem;
+            }
+
+            .reframe-icon {
+                font-size: 2rem;
             }
 
             .reframe-statement {
@@ -2421,12 +2435,15 @@
     <div class="reframe-section">
         <div class="reframe-container">
             <div class="reframe-card">
+                <div class="reframe-icon">❌</div>
                 <p class="reframe-statement">Most people think they need to push harder, figure themselves out, or find the right strategy.</p>
             </div>
             <div class="reframe-card emphasis">
+                <div class="reframe-icon">✅</div>
                 <p class="reframe-statement">What actually works: recognizing the patterns creating friction, experimenting with what works for you, and building skills that compound.</p>
             </div>
             <div class="reframe-card final">
+                <div class="reframe-icon">💪</div>
                 <p class="reframe-statement">That's the work.</p>
             </div>
         </div>
