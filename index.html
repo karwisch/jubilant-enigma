@@ -1747,6 +1747,59 @@
             text-align: center;
         }
 
+        /* Reframe Section */
+        .reframe-section {
+            background: linear-gradient(135deg, var(--cream), var(--warm-white));
+            padding: 4rem 2rem;
+        }
+
+        .reframe-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .reframe-statement {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            line-height: 1.6;
+            color: var(--charcoal);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .reframe-statement.emphasis {
+            font-weight: 600;
+            color: var(--teal);
+            font-size: 1.5rem;
+        }
+
+        .reframe-statement.final {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--mauve);
+            margin-bottom: 0;
+        }
+
+        /* Mobile styles for reframe */
+        @media (max-width: 768px) {
+            .reframe-section {
+                padding: 3rem 1.5rem;
+            }
+
+            .reframe-statement {
+                font-size: 1.2rem;
+            }
+
+            .reframe-statement.emphasis {
+                font-size: 1.3rem;
+            }
+
+            .reframe-statement.final {
+                font-size: 1.15rem;
+            }
+        }
+
         /* Back to Top Button */
         .back-to-top {
             position: fixed;
@@ -2330,38 +2383,23 @@
                         I want <span class="cycling-word" id="cycling-text">to stop feeling stuck</span>
                     </div>
                     <p class="hero-description">
-                        Wherever you are in your journey, there's a next step that makes sense.
-                        Our explorer below helps you identify exactly where you are and what comes next.
+                        The next step isn't the same for everyone. Our explorer helps you find what makes sense for where you are right now.
                     </p>
                     <div class="hero-cta">
                         <a href="#threshold-explorer" class="cta-button primary">Explore Your Journey</a>
-                        <a href="#contact" class="cta-button secondary">Get Started Today</a>
+                        <a href="#contact" class="cta-button secondary">Talk to Jim</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="spectrum-divider">
-        <div class="divider-container">
-            <div class="divider-line">
-                <div class="divider-dot teal"></div>
-                <div class="divider-dot purple"></div>
-                <div class="divider-dot mauve"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Mission Section -->
-    <div class="i-want-section" id="where-are-you">
-        <div class="i-want-container">
-            <h2 class="i-want-title">Turn Internal Friction Into Forward Momentum</h2>
-
-            <div class="i-want-card">
-                <p style="font-family: 'Montserrat', sans-serif; font-size: 1.3rem; font-weight: 400; line-height: 1.6; color: var(--charcoal); margin: 0;">
-                    Untangled Narrative helps you recognize new possibilities, actively experiment with change, build confidence and skills, and eventually become someone who trusts their own expertise and multiplies their impact.
-                </p>
-            </div>
+    <!-- Reframe Section -->
+    <div class="reframe-section">
+        <div class="reframe-container">
+            <p class="reframe-statement">Most people think they need to push harder, figure themselves out, or find the right strategy.</p>
+            <p class="reframe-statement emphasis">What actually works: recognizing the patterns creating friction, experimenting with what works for you, and building skills that compound.</p>
+            <p class="reframe-statement final">That's the work.</p>
         </div>
     </div>
 
@@ -3217,6 +3255,28 @@
         }
     </script>
 
+    <!-- Mission Section -->
+    <div class="i-want-section" id="where-are-you">
+        <div class="i-want-container">
+            <h2 class="i-want-title">Turn Internal Friction Into Forward Momentum</h2>
+
+            <div class="i-want-card">
+                <p style="font-family: 'Montserrat', sans-serif; font-size: 1.3rem; font-weight: 400; line-height: 1.6; color: var(--charcoal); margin: 0;">
+                    Untangled Narrative helps you recognize new possibilities, actively experiment with change, build confidence and skills, and eventually become someone who trusts their own expertise and multiplies their impact.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="spectrum-divider">
+        <div class="divider-container">
+            <div class="divider-line">
+                <div class="divider-dot teal"></div>
+                <div class="divider-dot purple"></div>
+                <div class="divider-dot mauve"></div>
+            </div>
+        </div>
+    </div>
 
     <!-- Persona Journey Section -->
     <section class="persona-section">
