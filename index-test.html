@@ -1744,27 +1744,27 @@
         /* Pain Points Section */
         .pain-question {
             font-family: 'Montserrat', sans-serif;
-            font-size: 2rem;
+            font-size: 1.6rem;
             font-weight: 700;
             color: #ffffff;
-            margin-bottom: 2rem;
+            margin-bottom: 1.25rem;
             text-align: left;
         }
 
         .pain-list {
             list-style: none;
             padding: 0;
-            margin: 0 0 2rem 0;
+            margin: 0 0 1.5rem 0;
         }
 
         .pain-item {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: 500;
-            line-height: 1.6;
+            line-height: 1.5;
             color: rgba(255, 255, 255, 0.6);
-            padding: 1rem 1.5rem;
-            margin-bottom: 0.75rem;
+            padding: 0.6rem 1rem;
+            margin-bottom: 0.5rem;
             border-left: 3px solid transparent;
             transition: all 0.6s ease;
             opacity: 0;
@@ -1784,21 +1784,51 @@
             }
         }
 
+        /* Spectrum color coding for pain points */
+        .pain-item.untangling-color { color: rgba(251, 192, 45, 0.7); }
+        .pain-item.agency-color { color: rgba(179, 98, 120, 0.7); }
+        .pain-item.balance-color { color: rgba(164, 120, 156, 0.7); }
+        .pain-item.skillsets-color { color: rgba(27, 127, 146, 0.7); }
+        .pain-item.leveling-color { color: rgba(44, 82, 130, 0.7); }
+
         .pain-item.highlighted {
             color: #ffffff;
-            border-left-color: var(--teal);
-            background: rgba(27, 127, 146, 0.15);
             transform: translateX(8px);
+        }
+
+        .pain-item.untangling-color.highlighted {
+            border-left-color: #fbc02d;
+            background: rgba(251, 192, 45, 0.15);
+        }
+
+        .pain-item.agency-color.highlighted {
+            border-left-color: #b36278;
+            background: rgba(179, 98, 120, 0.15);
+        }
+
+        .pain-item.balance-color.highlighted {
+            border-left-color: #a4789c;
+            background: rgba(164, 120, 156, 0.15);
+        }
+
+        .pain-item.skillsets-color.highlighted {
+            border-left-color: #1B7F92;
+            background: rgba(27, 127, 146, 0.15);
+        }
+
+        .pain-item.leveling-color.highlighted {
+            border-left-color: #2c5282;
+            background: rgba(44, 82, 130, 0.15);
         }
 
         @media (max-width: 768px) {
             .pain-question {
-                font-size: 1.6rem;
+                font-size: 1.4rem;
             }
 
             .pain-item {
-                font-size: 1.1rem;
-                padding: 0.875rem 1.25rem;
+                font-size: 0.95rem;
+                padding: 0.5rem 0.875rem;
             }
         }
 
@@ -2462,12 +2492,12 @@
                 <div class="hero-text">
                     <h2 class="pain-question">What feels hardest right now?</h2>
                     <ul class="pain-list">
-                        <li class="pain-item">Figuring out what I actually want (not what I should want)</li>
-                        <li class="pain-item">Seeing my own patterns clearly instead of staying stuck in them</li>
-                        <li class="pain-item">Making choices that align with what I actually believe</li>
-                        <li class="pain-item">Speaking up about what I'm capable of in a way that lands</li>
-                        <li class="pain-item">Building consistent momentum instead of starting and stopping</li>
-                        <li class="pain-item">Scaling what works without losing what matters</li>
+                        <li class="pain-item balance-color">Figuring out what I actually want (not what I should want)</li>
+                        <li class="pain-item untangling-color">Seeing my own patterns clearly instead of staying stuck in them</li>
+                        <li class="pain-item balance-color">Making choices that align with what I actually believe</li>
+                        <li class="pain-item skillsets-color">Speaking up about what I'm capable of in a way that lands</li>
+                        <li class="pain-item agency-color">Building consistent momentum instead of starting and stopping</li>
+                        <li class="pain-item leveling-color">Scaling what works without losing what matters</li>
                     </ul>
                     <p class="hero-description">
                         If any of these want statements resonate with you, you've come to the right place.
