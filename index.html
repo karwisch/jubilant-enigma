@@ -1716,13 +1716,16 @@
             color: var(--charcoal);
         }
 
-        .cycling-word {
-            color: var(--teal);
-            transition: opacity 0.8s ease;
+        .cycling-word-bg {
             background: white;
             padding: 0.2rem 0.6rem;
             border-radius: 6px;
             display: inline-block;
+        }
+
+        .cycling-word {
+            color: var(--teal);
+            transition: opacity 0.8s ease;
         }
 
         .cycling-word.fade-out {
@@ -2398,7 +2401,7 @@
                 <div class="hero-text">
                     <h1 class="hero-headline">What brought you here?</h1>
                     <div class="i-want-text" style="margin-bottom: 2rem;">
-                        I want <span class="cycling-word" id="cycling-text">to stop feeling stuck</span>
+                        I want <span class="cycling-word-bg"><span class="cycling-word" id="cycling-text">to stop feeling stuck</span></span>
                     </div>
                     <p class="hero-description">
                         The next step isn't the same for everyone. Our explorer helps you find what makes sense for where you are right now.
