@@ -1719,20 +1719,24 @@
         .cycling-word {
             color: var(--teal);
             transition: opacity 0.8s ease;
+            background: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            display: inline-block;
         }
 
         .cycling-word.fade-out {
             opacity: 0;
         }
 
-        /* Spectrum colors for cycling words - optimized for golden background */
-        .cycling-word.tangled { color: #8B0000; } /* Dark red */
-        .cycling-word.hopeful { color: #8B4513; } /* Saddle brown */
-        .cycling-word.untangling { color: #4a3f35; } /* Dark brown */
-        .cycling-word.agency { color: #7a3d52; } /* Dark mauve */
-        .cycling-word.balance { color: #5d3a7a; } /* Dark purple */
-        .cycling-word.skillsets { color: #0d5566; } /* Dark teal */
-        .cycling-word.leveling { color: #1a3d5c; } /* Navy blue */
+        /* Spectrum colors for cycling words - vibrant on white background */
+        .cycling-word.tangled { color: #d32f2f; } /* Red */
+        .cycling-word.hopeful { color: #f57c00; } /* Orange */
+        .cycling-word.untangling { color: #fbc02d; } /* Yellow */
+        .cycling-word.agency { color: var(--mauve); } /* Mauve */
+        .cycling-word.balance { color: #a4789c; } /* Purple */
+        .cycling-word.skillsets { color: var(--teal); } /* Teal */
+        .cycling-word.leveling { color: var(--teal); } /* Teal */
 
         .i-want-subtitle {
             font-family: 'Montserrat', sans-serif;
