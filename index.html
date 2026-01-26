@@ -113,7 +113,7 @@
         }
 
         .hero-section {
-            background: linear-gradient(135deg, #0d1417, #1a0f12);
+            background: #e8a03c;
             padding: 4rem 2rem;
             text-align: center;
         }
@@ -175,8 +175,8 @@
 
         .hero-description {
             font-size: 1.1rem;
-            color: #ffffff;
-            opacity: 0.9;
+            color: var(--charcoal);
+            opacity: 0.8;
             margin-bottom: 2.5rem;
             line-height: 1.6;
         }
@@ -819,7 +819,7 @@
         }
 
         .header p {
-            font-size: 1.1rem;
+            font-size: 0.85rem;
             color: var(--charcoal);
             opacity: 0.8;
             max-width: calc(100% - 60px);
@@ -1625,8 +1625,8 @@
             }
             
             .header p {
-                font-size: 1rem;
-                line-height: 1.5;
+                font-size: 0.75rem;
+                line-height: 1.3;
                 margin: 0 auto;
                 max-width: none;
             }
@@ -1713,14 +1713,7 @@
             font-size: 2.2rem;
             font-weight: 700;
             line-height: 1.4;
-            color: #ffffff;
-        }
-
-        .cycling-word-bg {
-            background: white;
-            padding: 0.2rem 0.6rem;
-            border-radius: 6px;
-            display: inline-block;
+            color: var(--charcoal);
         }
 
         .cycling-word {
@@ -1732,14 +1725,14 @@
             opacity: 0;
         }
 
-        /* Spectrum colors for cycling words - vibrant on white background */
-        .cycling-word.tangled { color: #d32f2f; } /* Red */
-        .cycling-word.hopeful { color: #f57c00; } /* Orange */
-        .cycling-word.untangling { color: #fbc02d; } /* Yellow */
-        .cycling-word.agency { color: var(--mauve); } /* Mauve */
-        .cycling-word.balance { color: #a4789c; } /* Purple */
-        .cycling-word.skillsets { color: var(--teal); } /* Teal */
-        .cycling-word.leveling { color: var(--teal); } /* Teal */
+        /* Spectrum colors for cycling words */
+        .cycling-word.tangled { color: #d32f2f; }
+        .cycling-word.hopeful { color: #f57c00; }
+        .cycling-word.untangling { color: #fbc02d; }
+        .cycling-word.agency { color: var(--mauve); }
+        .cycling-word.balance { color: #a4789c; }
+        .cycling-word.skillsets { color: var(--teal); }
+        .cycling-word.leveling { color: var(--teal); }
 
         .i-want-subtitle {
             font-family: 'Montserrat', sans-serif;
@@ -1752,73 +1745,6 @@
             margin-left: auto;
             margin-right: auto;
             text-align: center;
-        }
-
-        /* Reframe Section */
-        .reframe-section {
-            background: var(--warm-white);
-            padding: 5rem 2rem;
-        }
-
-        .reframe-container {
-            max-width: 750px;
-            margin: 0 auto;
-            border-left: 4px solid var(--teal);
-            padding-left: 2.5rem;
-        }
-
-        .reframe-statement {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.4rem;
-            line-height: 1.7;
-            color: var(--charcoal);
-            margin: 0 0 2rem 0;
-            font-weight: 400;
-        }
-
-        .reframe-statement:last-child {
-            margin-bottom: 0;
-        }
-
-        .reframe-statement.emphasis {
-            font-weight: 600;
-            color: var(--teal);
-            font-size: 1.5rem;
-            margin: 2.5rem 0;
-        }
-
-        .reframe-statement.final {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--mauve);
-            margin-top: 2.5rem;
-        }
-
-        /* Mobile styles for reframe */
-        @media (max-width: 768px) {
-            .reframe-section {
-                padding: 3.5rem 1.5rem;
-            }
-
-            .reframe-container {
-                border-left-width: 3px;
-                padding-left: 1.5rem;
-            }
-
-            .reframe-statement {
-                font-size: 1.15rem;
-                margin-bottom: 1.5rem;
-            }
-
-            .reframe-statement.emphasis {
-                font-size: 1.25rem;
-                margin: 2rem 0;
-            }
-
-            .reframe-statement.final {
-                font-size: 1.35rem;
-                margin-top: 2rem;
-            }
         }
 
         /* Back to Top Button */
@@ -2397,31 +2323,45 @@
     <div class="hero-section">
         <div class="hero-container">
             <div class="hero-content">
-                <div class="hero-rocket">🧭</div>
+                <div class="hero-rocket">🚀</div>
                 <div class="hero-text">
-                    <div class="i-want-text" style="margin-bottom: 2rem;">
-                        I want <span class="cycling-word" id="cycling-text">to stop feeling stuck</span>
-                    </div>
-                    <p class="hero-description">
-                        If any of these want statements resonate with you, you've come to the right place. 
-                        When there is a gap between what you want and where you are, and there is friction keeping you stuck, Untangled Narrative 
-                        can help you take the next steps toward untangling. To find out where you are on the untangling journey, scroll down or click the button below...
-                    </p>
+                    <h1 class="hero-headline">When the Biggest Obstacle<br> to Your Success<br> is a Story in Your Head.</h1>
+                    <p class="hero-subheadline">Untangled Narrative helps you see where the misalignment is and untangle it in real time.<br><br>
+                    Using the Narrative Clarity System, we map out where your inner narrative, outer expression, and perceived value have fallen out of sync, 
+                    and create a clear path to realignment.</p>
                     <div class="hero-cta">
-                        <a href="#threshold-explorer" class="cta-button primary">Explore Your Journey</a>
-                        <a href="#contact" class="cta-button secondary">Talk to Jim</a>
+                        <a href="#contact" class="cta-button secondary">Get Started Today</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Reframe Section -->
-    <div class="reframe-section">
-        <div class="reframe-container">
-            <p class="reframe-statement">You may have tried willing yourself to "push through", forcing self discipline, or overhauling your entire life. When you find yourself still stuck where you were, it may be time to try a different approach.</p>
-            <p class="reframe-statement emphasis">At Untangled Narrative we believe that recognizing the patterns creating friction, experimenting with what works for you, and building skills that compound are what enables real human change.</p>
-            <p class="reframe-statement final">When you're ready, let's begin.</p>
+    <div class="spectrum-divider">
+        <div class="divider-container">
+            <div class="divider-line">
+                <div class="divider-dot teal"></div>
+                <div class="divider-dot purple"></div>
+                <div class="divider-dot mauve"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- I Want Animation Section -->
+    <div class="i-want-section" id="where-are-you">
+        <div class="i-want-container">
+            <h2 class="i-want-title">What brought you here?</h2>
+
+            <div class="i-want-card">
+                <div class="i-want-text">
+                    I want <span class="cycling-word" id="cycling-text">to stop feeling stuck</span>
+                </div>
+            </div>
+
+            <p class="i-want-subtitle">
+                Wherever you are in your journey, there's a next step that makes sense.
+                Our explorer below helps you identify exactly where you are and what comes next.
+            </p>
         </div>
     </div>
 
@@ -3277,28 +3217,6 @@
         }
     </script>
 
-    <!-- Mission Section -->
-    <div class="i-want-section" id="where-are-you">
-        <div class="i-want-container">
-            <h2 class="i-want-title">Turn Internal Friction Into Forward Momentum</h2>
-
-            <div class="i-want-card">
-                <p style="font-family: 'Montserrat', sans-serif; font-size: 1.3rem; font-weight: 400; line-height: 1.6; color: var(--charcoal); margin: 0;">
-                    Untangled Narrative helps you recognize new possibilities, actively experiment with change, build confidence and skills, and eventually become someone who trusts their own expertise and multiplies their impact.
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <div class="spectrum-divider">
-        <div class="divider-container">
-            <div class="divider-line">
-                <div class="divider-dot teal"></div>
-                <div class="divider-dot purple"></div>
-                <div class="divider-dot mauve"></div>
-            </div>
-        </div>
-    </div>
 
     <!-- Persona Journey Section -->
     <section class="persona-section">
